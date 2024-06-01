@@ -1,0 +1,22 @@
+<main>
+    <div>
+        <!-- topMenus TopMenu.children -->
+        <ng-container *ngFor="let menu of topMenus">
+            <div class="menu">
+                    <app-icon-button [props]="{icon: menu.icon, text: menu.text}"></app-icon-button>
+                <!-- </div> -->
+                <!-- menu is each element of MenuMains -->
+                <ng-container *ngFor="let group of menu.children">
+                    
+                    <!-- group is each element of MenuGroups -->
+                    <ng-container *ngFor="let item of group.children">
+                        <!-- item is each element of MenuItems -->
+                    </ng-container> 
+                </ng-container>
+                <div class="groupContainer">
+                    
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</main>
