@@ -1,0 +1,9 @@
+/* Example styles */
+mat-sidenav-content {
+    background-color: #fafafa;
+  }
+  
+  mat-nav-list {
+    width: 250px;
+  }
+  

@@ -39,15 +39,25 @@
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:624933476.
 import { Component, isStandalone } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { IconButtonComponent } from './Element/iconButton';
-import { IconLinkComponent } from './Element/iconLink.component';
+import { IconButtonComponent } from './Element/iconButton/iconButton.component';
+import { IconLinkComponent } from './Element/iconLink/iconLink.component';
 import { NavbarComponent } from './Component/navbar.component';
+import { CdkMenuStandaloneMenuExample } from "./Element/MenuButton/menuButton.component";
+// import { SidenavComponent } from "./Component/Sidenav/sidenav.component";
+
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  templateUrl: './app.component.html',
-  imports: [RouterOutlet, IconButtonComponent, IconLinkComponent, NavbarComponent]
+    selector: 'app-root',
+    standalone: true,
+    templateUrl: './app.component.html',
+    imports: [
+        RouterOutlet,
+        IconButtonComponent,
+        IconLinkComponent,
+        NavbarComponent,
+        CdkMenuStandaloneMenuExample,
+        // SidenavComponent
+    ],
 })
 export class AppComponent {
   title = 'Ask Nerus';

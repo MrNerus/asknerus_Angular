@@ -1,0 +1,20 @@
+<mat-sidenav-container>
+    <mat-sidenav #sidenav mode="over" [(opened)]="opened">
+      <mat-nav-list>
+        <a mat-list-item href="#">Link 1</a>
+        <a mat-list-item href="#">Link 2</a>
+        <a mat-list-item href="#">Link 3</a>
+      </mat-nav-list>
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+      <mat-toolbar color="primary">
+        <span>Sidenav Example</span>
+        <span class="mat-button-icon-button" (click)="sidenav.toggle()">
+          <mat-icon>close</mat-icon>
+        </span>
+      </mat-toolbar>
+      <!-- Main content goes here -->
+    </mat-sidenav-content>
+</mat-sidenav-container>
+  

@@ -2,8 +2,8 @@
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:1760960967.
 import { NgComponentOutlet, NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { IconLink } from '../Element/iconLink.component';
-import { IconButtonComponent } from "../Element/iconButton";
+import { IconLink } from '../Element/iconLink/iconLink.component';
+import { IconButtonComponent } from "../Element/iconButton/iconButton.component";
 
 @Component({
     selector: 'nav-bar',

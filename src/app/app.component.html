@@ -181,6 +181,49 @@
   <h1>Hello World</h1>
   <app-icon-button [props]="{'icon': 'home', 'text': 'Home'}"></app-icon-button>
   <app-icon-link [props]="{icon: 'web', text: 'web', href: '#', target: '_blank'}"/>
+  <!-- <app-sidenav></app-sidenav> -->
+  <app-menu-button [menuGroups]="[
+    {
+      icon: 'search', 
+      text: 'Search', 
+      children: [
+        {icon: 'home', text: 'Home'}, 
+        {icon: 'menu', text: 'Menu'}, 
+        {icon: 'remove', text: 'Remove'},
+        {icon: 'bolt', text: 'Bolt'},
+        {icon: 'key', text: 'Key'},
+        {icon: 'sync', text: 'Sync'}
+      ]
+    },
+    {
+      icon: 'settings', 
+      text: 'Settings', 
+      children: [
+        {icon: 'favorite', text: 'Favorite'}, 
+        {icon: 'delete', text: 'Delete'}, 
+        {icon: 'add', text: 'Add'}
+      ]
+    },
+    {
+      icon: 'star', 
+      text: 'Star', 
+      children: [
+        {icon: 'logout', text: 'Logout'}, 
+        {icon: 'cancel', text: 'Cancel'}, 
+        {icon: 'check', text: 'Check'}
+      ]
+    },
+    {
+      icon: 'refresh', 
+      text: 'Refresh', 
+      children: [
+        {icon: 'login', text: 'Login'}, 
+        {icon: 'download', text: 'Download'}, 
+        {icon: 'apps', text: 'Apps'}
+      ]
+    }
+  ]">
+  </app-menu-button>
   <nav-bar></nav-bar>
 </main>
 
