@@ -15,15 +15,19 @@ import { IconLink, IconLinkComponent } from '../iconLink/iconLink.component';
 // export class CdkMenuStandaloneMenuExample {}
 
 export class CdkMenuStandaloneMenuExample {
-  @Input() menuGroups: MenuGroups[] = [
-                  {
-                      icon: 'web', 
-                      text: 'Web', 
+  @Input() buttonMain: ButtonMain = {
+                  icon: 'box', 
+                  text: 'Button', 
+                  menuGroups: [
+                    {
+                      icon: 'box', 
+                      text: 'Heading', 
                       children: [
-                          {icon: 'search', text: 'Search', href: '#'}
+                          {icon: 'box', text: 'Link', href: '#'}
                       ]
-                  }
-              ]
+                    }
+                  ]
+                }
 };
 
 
@@ -32,3 +36,9 @@ export interface MenuGroups {
   text: string;
   children: IconLink[];
 };
+
+export interface ButtonMain {
+    icon: string;
+    text: string;
+    menuGroups: MenuGroups[];
+}

@@ -1,4 +1,4 @@
-<mat-sidenav-container>
+<!-- <mat-sidenav-container>
     <mat-sidenav #sidenav mode="over" [(opened)]="opened">
       <mat-nav-list>
         <a mat-list-item href="#">Link 1</a>
@@ -14,7 +14,62 @@
           <mat-icon>close</mat-icon>
         </span>
       </mat-toolbar>
-      <!-- Main content goes here -->
+      Main content goes here
     </mat-sidenav-content>
-</mat-sidenav-container>
+</mat-sidenav-container> -->
+
+<!-- Suggested code may be subject to a license. Learn more: ~LicenseLog:3022456941. -->
+<main>
+  <div id = 'menuCollections' class="menuCollections" [attr.toggle_open]="toggleOpen? 'true' : 'false'">
+      <div><app-icon-button [props]="{'icon': 'menu', 'text': 'Menu'}" (click)="toggleToggleOpen()"></app-icon-button></div>
+      <div>
+        <div *ngFor="let menuCollection of menuCollections.menuCollections">
+          <app-menu-button [buttonMain]="menuCollection"></app-menu-button>
+        </div>
+
+        <!-- <app-menu-button [menuGroups]="[
+        {
+          icon: 'search', 
+          text: 'Search', 
+          children: [
+            {icon: 'home', text: 'Home'}, 
+            {icon: 'menu', text: 'Menu'}, 
+            {icon: 'remove', text: 'Remove'},
+            {icon: 'bolt', text: 'Bolt'},
+            {icon: 'key', text: 'Key'},
+            {icon: 'sync', text: 'Sync'}
+          ]
+        },
+        {
+          icon: 'settings', 
+          text: 'Settings', 
+          children: [
+            {icon: 'favorite', text: 'Favorite'}, 
+            {icon: 'delete', text: 'Delete'}, 
+            {icon: 'add', text: 'Add'}
+          ]
+        },
+        {
+          icon: 'star', 
+          text: 'Star', 
+          children: [
+            {icon: 'logout', text: 'Logout'}, 
+            {icon: 'cancel', text: 'Cancel'}, 
+            {icon: 'check', text: 'Check'}
+          ]
+        },
+        {
+          icon: 'refresh', 
+          text: 'Refresh', 
+          children: [
+            {icon: 'login', text: 'Login'}, 
+            {icon: 'download', text: 'Download'}, 
+            {icon: 'apps', text: 'Apps'}
+          ]
+        }
+      ]">
+      </app-menu-button> -->
+      </div>
+  </div>
+</main>
   

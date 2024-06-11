@@ -1,12 +1,14 @@
 <!-- <button [cdkMenuTriggerFor]="menu" class="example-standalone-trigger">Click me!</button> -->
 <!-- Suggested code may be subject to a license. Learn more: ~LicenseLog:2975005727. -->
-<app-icon-button [props]="{icon: 'search', text: 'home'}" [cdkMenuTriggerFor]="menu"/>
+<app-icon-button [props]="{icon: buttonMain.icon, text: buttonMain.text}" [cdkMenuTriggerFor]="menu"/>
 <ng-template #menu let-overlayRef>
     <div class="backdrop" >
       <div class="menuGroup" cdkMenu>
-          <ng-container *ngFor="let menuGroup of menuGroups">
+          <ng-container *ngFor="let menuGroup of buttonMain.menuGroups">
             <div class="menu">
-              <div><h1>{{menuGroup.text}}</h1></div>
+              <div class="menuHeading">
+                <span class="material-symbols-rounded">{{menuGroup.icon}}</span>
+                <h1>{{menuGroup.text}}</h1></div>
               <div class="menuItem">
                 <ng-container *ngFor="let item of menuGroup.children">
                   <app-icon-link [props]="{icon: item.icon, text: item.text, href: item.href, target: item.target}"></app-icon-link>

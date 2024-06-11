@@ -43,20 +43,21 @@ import { IconButtonComponent } from './Element/iconButton/iconButton.component';
 import { IconLinkComponent } from './Element/iconLink/iconLink.component';
 import { NavbarComponent } from './Component/navbar.component';
 import { CdkMenuStandaloneMenuExample } from "./Element/MenuButton/menuButton.component";
-// import { SidenavComponent } from "./Component/Sidenav/sidenav.component";
+import { SidenavComponent } from "./Component/Sidenav/sidenav.component";
 
 
 @Component({
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.component.html',
+    styleUrl: './app.component.css',
     imports: [
         RouterOutlet,
         IconButtonComponent,
         IconLinkComponent,
         NavbarComponent,
         CdkMenuStandaloneMenuExample,
-        // SidenavComponent
+        SidenavComponent
     ],
 })
 export class AppComponent {

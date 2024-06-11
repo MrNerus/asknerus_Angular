@@ -60,3 +60,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   border-radius: 1rem;
   border-radius: var(--roundingS);
 }
+
+.menuCollections[toggle_open='true'] .text {
+  display: none;
+  width: 0;
+}
+
+.menuCollections[toggle_open='false'] .text {
+  display: flex;
+  width: fit-content;
+}

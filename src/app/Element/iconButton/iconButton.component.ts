@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
   template: `
     <div class="icon-button">
         <span class="material-symbols-rounded">{{props.icon}}</span>
-        <span>{{props.text}}</span>
+        <span class="text">{{props.text}}</span>
     </div>
   `,
   styles: [

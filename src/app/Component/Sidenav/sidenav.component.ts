@@ -1,24 +1,41 @@
-import { Component } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatListModule } from '@angular/material/list';
-import { MatIconModule } from '@angular/material/icon';
+import { Component, Input } from '@angular/core';
+import { MenuGroups, CdkMenuStandaloneMenuExample, ButtonMain } from '../../Element/MenuButton/menuButton.component';
+import { NgFor } from '@angular/common';
+import { IconButtonComponent } from "../../Element/iconButton/iconButton.component";
 
 @Component({
-  selector: 'app-sidenav',
-  standalone : true,
-  imports: [      BrowserAnimationsModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatListModule,
-    MatIconModule
-],
-  templateUrl: 'sidenav.component.html',
-  styleUrls: ['sidenav.component.css'],
+    selector: 'app-sidenav',
+    standalone: true,
+    templateUrl: './sidenav.component.html',
+    styleUrls: ['./sidenav.component.css'],
+    imports: [CdkMenuStandaloneMenuExample, NgFor, IconButtonComponent]
 })
 export class SidenavComponent {
-  opened = false;
+  toggleOpen: boolean = true;
+
+  // Also, intended to serve as input sample.
+  @Input() menuCollections: MenuCollections = {
+    menuCollections: [
+      {
+        icon: 'home',
+        text: 'Home',
+        menuGroups: [
+          {
+            icon: 'web',
+            text: 'Web',
+            children: [
+              {icon: 'search', text: 'Search', href: '#'}
+            ] // More can be added to this list
+          }
+        ] // More can be added to this list
+      }
+    ] // More can be added to this list
+  }
+
+  toggleToggleOpen(): void {
+    this.toggleOpen =!this.toggleOpen;
+  }
+}
+interface MenuCollections {
+  menuCollections: ButtonMain[]    
 }
