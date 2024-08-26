@@ -4,7 +4,7 @@ import { OverlayRef } from '@angular/cdk/overlay';
 import { IconButtonComponent } from '../iconButton/iconButton.component';
 import { NgComponentOutlet, NgFor } from '@angular/common';
 import { IconLink, IconLinkComponent } from '../iconLink/iconLink.component';
-/** @title Menu with Standalone Trigger. */
+
 @Component({
     selector: 'app-menu-button',
     styleUrl: 'menuButton.component.css',
@@ -12,7 +12,6 @@ import { IconLink, IconLinkComponent } from '../iconLink/iconLink.component';
     standalone: true,
     imports: [NgComponentOutlet, NgFor, CdkMenuTrigger, CdkMenu, CdkMenuItem, IconButtonComponent, IconLinkComponent]
 })
-// export class CdkMenuStandaloneMenuExample {}
 
 export class CdkMenuStandaloneMenuExample {
   @Input() buttonMain: ButtonMain = {

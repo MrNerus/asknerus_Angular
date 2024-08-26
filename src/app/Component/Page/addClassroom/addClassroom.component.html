@@ -1,0 +1,32 @@
+<main>
+    <form action="/api/add" method="post">
+        <app-textBox [props]="{
+          regex: '[A-Za-z]+', placeholder: 'Enter Text Only',
+          value: '', type: 'text', label: '', icon: 'add', tooltip: 'Hello', name: 'class',
+          id: 'class', isRequired: true
+        }"/>
+
+      <app-textBox [props]="{
+        regex: '[0-9]+', placeholder: 'Enter Number Only',
+        value: '', type: 'text', label: '', icon: 'Home', tooltip: 'Hello', name: 'class',
+        id: 'class', isRequired: true
+      }"/>
+
+      <app-textBox [props]="{
+        regex: '[A-Za-z0-9]+', placeholder: 'Alpha Numeric Characters Only',
+        value: '', type: 'text', label: '', icon: 'Settings', tooltip: 'Hello', name: 'class',
+        id: 'class', isRequired: true
+      }"/>
+
+      <app-textBox [props]="{
+        regex: '[A-Za-z0-9 ]+', placeholder: 'Text Box is Allowed',
+        value: '', type: 'text', label: '', icon: '', tooltip: 'Hello', name: 'class',
+        id: 'class', isRequired: true
+      }"/>
+
+      <app-dropdown></app-dropdown>
+
+        <app-icon-button [props]="{'icon': 'home', 'text': 'Home', 'type': 'capsule'}"></app-icon-button>
+
+    </form>
+</main>
