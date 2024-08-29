@@ -12,7 +12,7 @@ import { DropdownComponent } from "../../../Element/DropDown/dropDown.component"
     standalone: true,
     // inputs: ['props'],
     imports: [SanitizeHtmlPipe, TextBoxComponent, IconButtonComponent, DropdownComponent],
-    encapsulation: ViewEncapsulation.None
+    // encapsulation: ViewEncapsulation.None
 })
 
 export class addClassroomComponent {
