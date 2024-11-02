@@ -4,29 +4,28 @@ on:
   push:
     branches:
       - main
+      
+permissions:
+  contents: write
+  
 jobs:
   build-and-deploy:
+    concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '20.x'
-    # - uses: actions/cache@v1
-    #   with:
-    #     path: ~/.npm
-    #     key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-    #     restore-keys: |
-    #       ${{ runner.os }}-node-    
-          
-    - name: Build
-      run: |
-        npm install
-        npm run build
-        
-    - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@releases/v3
-      with:
-        BRANCH: gh-pages
-        FOLDER: dist
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node 20.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: '20.x'   
+      - name: Build
+        run: |
+          npm install
+          npm run build
+      - name: Deploy To Page
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
+          branch: gh-pages
+
