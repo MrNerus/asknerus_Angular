@@ -21,8 +21,10 @@ export class IconButtonComponent {
     text: 'Insert Text',
     type: 'plain',
     color: 'primary',
-    mode: 'disabled'
+    mode: 'enabled'
   };
+
+  @Input() clickHandler: Function;
 
   constructor(private elRef: ElementRef) {}
   ngOnInit(): void {

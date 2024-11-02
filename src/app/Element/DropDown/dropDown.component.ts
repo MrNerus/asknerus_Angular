@@ -21,7 +21,9 @@ export class DropdownComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void { this.classes = ClassList.getClassList() }
+  ngOnInit(): void { 
+    // this.classes = ClassList.getClassList() 
+  }
 
   onClassSelect(classes){
     console.log(classes.target.value)

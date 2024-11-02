@@ -1,0 +1,34 @@
+<main class="padding">
+    <form action="/api/add" method="post" #form_AddClassroom="ngForm" class="flex vertical align_center gap borderRadius paddingHalf" id="editClassroomForm">
+      <p class="width100">View Class</p>
+      <hr class="width100">
+      <div class="grid gridCol3 width100">
+        <label for="Code" class="self_align_center">Class Code:</label>
+        <app-textBox [props]="{
+            regex: '[A-Za-z0-9]+', placeholder: 'Enter Class Code', type: 'text', icon: 'add', tooltip: 'A-Z, a-z, 0-9', name: 'class', value: classCode,
+            id: 'Code', isRequired: true, isReadonly: true
+        }" class="width100 span2Right" />
+      </div>
+      
+      <div class="grid gridCol3 width100">
+        <label for="Name" class="self_align_center">Class Name:</label>
+        <app-textBox [props]="{
+            regex: '[A-Za-z0-9]+', placeholder: 'Enter Class Name', type: 'text', label: '', icon: 'add', tooltip: 'A-Z, a-z, 0-9', name: 'class', value: className,
+          id: 'Name', isRequired: true, isReadonly: true
+        }" class="width100 span2Right" />
+      </div>
+
+      <div class="grid gridCol3 width100">
+        <label for="IsActive" class="self_align_center">Is Active:</label>
+        <div class="width100 span2Right">
+          <app-toggle [props]="{id: 'classroomToggle', name: 'classroomToggle', isChecked: isActive, isReadOnly: true}" />
+        </div>
+      </div>
+      
+      <div class="grid gridCol2 gap width100">
+        <app-icon-button [props]="{'icon': 'keyboard_backspace', 'text': 'Back', 'type': 'capsule'}" onClick="window.location = '/classroom/list'"/>
+        <app-icon-button [props]="{'icon': 'Edit', 'text': 'Edit', 'type': 'capsule'}" onclick = "edit()"/>
+      </div>
+
+    </form>
+</main>

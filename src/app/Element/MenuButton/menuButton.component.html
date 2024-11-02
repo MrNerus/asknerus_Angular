@@ -11,7 +11,7 @@
                 <h1>{{menuGroup.text}}</h1></div>
               <div class="menuItem">
                 <ng-container *ngFor="let item of menuGroup.children">
-                  <app-icon-link [props]="{icon: item.icon, text: item.text, href: item.href, target: item.target}"></app-icon-link>
+                  <app-icon-link [props]="{icon: item.icon, text: item.text, href: item.href, rhref: item.rhref, target: item.target}"></app-icon-link>
                 </ng-container>
               </div>
             </div>

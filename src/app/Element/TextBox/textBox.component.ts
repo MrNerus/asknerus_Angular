@@ -25,6 +25,8 @@ export class TextBoxComponent {
     attr_name: string         = '';
     attr_id: string           = '';
     attr_isRequired: string   = '';
+    attr_isReadonly: string   = '';
+    attr_class_isReadonly: string   = '';
     universal_textBox: string = '';
 
     ngOnInit(): void {
@@ -39,11 +41,13 @@ export class TextBoxComponent {
         this.attr_name        = this.props.name        ? `name = '${this.props.name}'`                                      : '';
         this.attr_id          = this.props.id          ? `id = '${this.props.id}'`                                          : '';
         this.attr_isRequired  = this.props.isRequired  ? `required`                                                         : '';
+        this.attr_isReadonly  = this.props.isReadonly  ? `readonly`                                                         : '';
+        this.attr_class_isReadonly  = this.props.isReadonly  ? `cursor_readonly`                                                   : '';
 
         this.universal_textBox = `
-        <div class="universal-textbox">
+        <div class="universal-textbox ${this.attr_class_isReadonly}">
           ${this.attr_icon}
-          <input ${this.attr_regex} ${this.attr_placeholder} ${this.attr_value} ${this.attr_type} ${this.attr_label} ${this.attr_name} ${this.attr_id} ${this.attr_isRequired}/>
+          <input ${this.attr_regex} ${this.attr_placeholder} ${this.attr_value} ${this.attr_type} ${this.attr_label} ${this.attr_name} ${this.attr_id} ${this.attr_isRequired} ${this.attr_isReadonly}/>
           ${this.attr_tooltip}
         </div>
         `;
@@ -61,4 +65,5 @@ export interface ITextBox {
     name?: string,
     id?: string,
     isRequired?: boolean,
+    isReadonly?: boolean
 }

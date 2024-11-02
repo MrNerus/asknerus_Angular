@@ -34,9 +34,9 @@
                 icon: 'school',
                 text: 'Classroom',
                 children: [
-                  {icon: 'add', text: 'Add', href: '#'},
-                  {icon: 'edit', text: 'Edit', href: '#'},
-                  {icon: 'menu', text: 'See All', href: '#'}
+                  {icon: 'add', text: 'Add', rhref: '/classroom/add'},
+                  {icon: 'edit', text: 'Edit', rhref: '/classroom/edit'},
+                  {icon: 'menu', text: 'See All', rhref: '/classroom/list'}
                 ]
               },
               {
@@ -175,7 +175,8 @@
     <div class="pageContainer">
   
       <!-- <app-researchLab/> -->
-      <app-addClassrooom/>
+      <router-outlet></router-outlet>
+      <!-- <app-addClassrooom/> -->
     </div>
   </div>
 </main>

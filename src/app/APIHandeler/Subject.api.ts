@@ -1,3 +1,10 @@
+import { Observable } from "rxjs";
+import customConfig from '../../customConfig.json';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { IListClassroom } from "../Component/Page/classroom/listClassroom/listClassroom.component";
+
+@Injectable({providedIn: 'root'})
 export class SubjectList {
     static subjectList: any = [
         { id: 1, code: 'CACS101', class_id: 1, name: 'Computer Fundamentals & Applications' },
@@ -57,6 +64,13 @@ export class SubjectList {
         console.log(classId);
         let r: any = this.subjectList.filter(x => x.class_id.toString() == classId)
         return r
-
     }
+
+    // getSubjectList(): Observable<IListClassroom[]> {
+    //     return this.http.get<IListClassroom[]>(`${customConfig.backend_URL}/getClassList`)
+    // }
+
+    constructor(private http: HttpClient) {
+        // This service can now make HTTP requests via `this.http`.
+      }
 }

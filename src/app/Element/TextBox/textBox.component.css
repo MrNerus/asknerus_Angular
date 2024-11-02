@@ -49,11 +49,11 @@
     border-width: 0px 0px 1px 0px;
 }
 
-.universal-textbox:has(> input:focus, input:hover) .tooltip {
+.universal-textbox:has(> input:focus:not(:read-only), input:hover:not(:read-only)) .tooltip {
     display: flex;
 }
 
-.universal-textbox:has(> input:not(:valid)) {
+.universal-textbox:has(> input:invalid:not(:read-only)) {
     border: 1px solid var(--error);
 }
 

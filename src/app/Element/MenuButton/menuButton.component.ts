@@ -3,7 +3,7 @@ import {CdkMenu, CdkMenuItem, CdkMenuTrigger} from '@angular/cdk/menu';
 import { OverlayRef } from '@angular/cdk/overlay';
 import { IconButtonComponent } from '../iconButton/iconButton.component';
 import { NgComponentOutlet, NgFor } from '@angular/common';
-import { IconLink, IconLinkComponent } from '../iconLink/iconLink.component';
+import { IIconLink, IconLinkComponent } from '../iconLink/iconLink.component';
 
 @Component({
     selector: 'app-menu-button',
@@ -33,7 +33,7 @@ export class CdkMenuStandaloneMenuExample {
 export interface MenuGroups {
   icon: string;
   text: string;
-  children: IconLink[];
+  children: IIconLink[];
 };
 
 export interface ButtonMain {

@@ -1,65 +1,44 @@
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:2700584207.
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:1760960967.
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { SanitizeHtmlPipe } from "../../Pipe/sanitizer";
 
 @Component({
   selector: 'app-icon-link',
   standalone: true,
-  template: `
-    <a href = "{{props.href}}" target = "{{props.target}}" class="icon-button">
-        <span class="material-symbols-rounded">{{props.icon}}</span>
-        <span>{{props.text}}</span>
-    </a>
-  `,
-  styles: [
-    `.icon-button {
-      display: flex;
-      align-items: center;
-      width: fit-content;
-      gap: 0.5rem;
-      cursor: pointer;
-      position: relative;
-      transition: var(--transition-speed);
-      padding: 0 0 0.25rem 0;
-      text-decoration: none;
-      color: var(--text);
-    }`,
-    `.icon-button:before {
-      position: absolute;
-      background-color: var(--text);
-      content: '';
-      height: 0px;
-      bottom: 0px;
-      left: 50%;
-      width: 0px;
-      transition: var(--transition-speed)
-    }`,
-    `.icon-button:hover {
-      color: var(--primary);
-    }`,
-    `.icon-button:hover:before {
-      color: var(--primary);
-      background-color: var(--primary);
-      height: 0.05rem;
-      width: 100%;
-      left: 0px;
-    }`
-  ],
-  inputs: ['props']
+  templateUrl: './iconLink.component.html',
+  styleUrl: './iconLink.component.css',
+  inputs: ['props'],
+  imports: [SanitizeHtmlPipe],
+  encapsulation: ViewEncapsulation.None
 })
 export class IconLinkComponent {
-    @Input() props: IconLink = {
-        icon: 'check_box_outline_blank',
-        text: 'Insert Text',
-        href: '#',
-        target: '_blank'
-    };
+  attr_rhref: string = '';
+  attr_href: string = '';
+  attr_target: string = '';
+
+  universal_iconLink: string = '';
+
+  @Input({ required: true }) props: Partial<IIconLink> = {}
+      
+  ngOnInit(): void {
+    this.attr_rhref = `routerLink="${this.props.rhref ?? '#'}"`;
+    this.attr_href = `href="${this.props.rhref ?? this.props.href ?? '#'}"`;
+    this.attr_target = this.props.target == "" ? '' : `target='${this.props.target}'`;
+    
+    this.universal_iconLink = `
+      <a ${this.attr_href} ${this.attr_rhref} ${this.attr_target} class="icon-link" onClick="window.location = '${this.props.rhref ?? this.props.href ?? '#'}';">
+        <span class="material-symbols-rounded">${this.props.icon}</span>
+        <span>${this.props.text}</span>
+      </a>`;
+  }
 }
 
-export interface IconLink {
+export interface IIconLink {
     icon: string;
     text: string;
     href?: string;
+    rhref?: string;
     target?: string;
 }
 
