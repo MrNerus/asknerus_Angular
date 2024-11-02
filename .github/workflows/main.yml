@@ -26,6 +26,6 @@ jobs:
       - name: Deploy To Page
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist
+          folder: dist/myapp/browser
           branch: gh-pages
 
