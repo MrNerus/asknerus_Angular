@@ -19,7 +19,7 @@ import { ListQuestionomponent } from './Component/Page/Questions/Querstion_List/
 export const routes: Routes = [
     { path: 'classroom/add', component: addClassroomComponent },
     { path: 'classroom/edit', component: editClassroomComponent },
-    { path: 'classroom/view', component: viewClassroomComponent },
+    { path: 'classroom/view/:code', component: viewClassroomComponent },
     { path: 'classroom', component: listClassroomComponent },
     
     { path: 'subjects/add', component: addSubjectComponent },
