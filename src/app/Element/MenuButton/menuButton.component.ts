@@ -14,19 +14,7 @@ import { IIconLink, IconLinkComponent } from '../iconLink/iconLink.component';
 })
 
 export class CdkMenuStandaloneMenuExample {
-  @Input() buttonMain: ButtonMain = {
-                  icon: 'box', 
-                  text: 'Button', 
-                  menuGroups: [
-                    {
-                      icon: 'box', 
-                      text: 'Heading', 
-                      children: [
-                          {icon: 'box', text: 'Link', href: '#'}
-                      ]
-                    }
-                  ]
-                }
+  @Input({ required: true }) buttonMain: Partial<ButtonMain> = {};
 };
 
 

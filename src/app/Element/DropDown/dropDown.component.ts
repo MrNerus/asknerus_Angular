@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgComponentOutlet, NgFor } from '@angular/common';
-import { ClassList } from '../../APIHandeler/Class.api';
+import { Classes } from '../../APIHandeler/Class.api';
 import { SubjectList } from '../../APIHandeler/Subject.api';
 import { ChapterList } from '../../APIHandeler/Chapter.api';
 
@@ -16,8 +16,8 @@ import { ChapterList } from '../../APIHandeler/Chapter.api';
 
 export class DropdownComponent implements OnInit {
   classes: any[] = []
-  subjects: any[] = []
-  chapters: any[] = []
+  // subjects: any[] = []
+  // chapters: any[] = []
 
   constructor() { }
 
@@ -27,11 +27,11 @@ export class DropdownComponent implements OnInit {
 
   onClassSelect(classes){
     console.log(classes.target.value)
-    this.subjects = SubjectList.getSubjectList(classes.target.value);
-    this.chapters = [];
+    // this.subjects = SubjectList.getSubjectList(classes.target.value);
+    // this.chapters = [];
   }
 
   onSubjectSelect(subjects){
-    this.chapters = ChapterList.getChapterList(subjects.target.value);
+    // this.chapters = ChapterList.getChapterList(subjects.target.value);
   }
 }

@@ -11,7 +11,8 @@
 <main >
   <div class="fullPage">
     <div class="sideNavContainer">
-      <app-sidenav [menuCollections] = "{
+      <app-sidenav [menuCollections] = "
+      {
         menuCollections: [
           {
             icon: 'home',
@@ -34,36 +35,36 @@
                 icon: 'school',
                 text: 'Classroom',
                 children: [
-                  {icon: 'add', text: 'Add', rhref: '/classroom/add'},
-                  {icon: 'edit', text: 'Edit', rhref: '/classroom/edit'},
-                  {icon: 'menu', text: 'See All', rhref: '/classroom/list'}
+                  {icon: 'add', text: 'Add', rhref: '/classroom/add', href: '/classroom/add'},
+                  {icon: 'edit', text: 'Edit', rhref: '/classroom/edit', href: '/classroom/edit'},
+                  {icon: 'menu', text: 'See All', rhref: '/classroom/list', href: '/classroom/list'}
                 ]
               },
               {
                 icon: 'book',
                 text: 'Subjects',
                 children: [
-                  {icon: 'add', text: 'Add', href: '#'},
-                  {icon: 'edit', text: 'Edit', href: '#'},
-                  {icon: 'menu', text: 'See All', href: '#'}
+                  {icon: 'add', text: 'Add', rhref: '/subjects/add', href: '/subjects/add'},
+                  {icon: 'edit', text: 'Edit', rhref: '/subjects/edit', href: '/subjects/edit'},
+                  {icon: 'menu', text: 'See All', rhref: '/subjects/view', href: '/subjects/view'}
                 ]
               },
               {
                 icon: 'bookmark',
                 text: 'Chapter',
                 children: [
-                  {icon: 'add', text: 'Add', href: '#'},
-                  {icon: 'edit', text: 'Edit', href: '#'},
-                  {icon: 'menu', text: 'See All', href: '#'}
+                  {icon: 'add', text: 'Add', rhref: '/chapters/add', href: '/chapters/add'},
+                  {icon: 'edit', text: 'Edit', rhref: '/chapters/edit', href: '/chapters/edit'},
+                  {icon: 'menu', text: 'See All', rhref: '/chapters/view', href: '/chapters/view'}
                 ]
               },
               {
                 icon: 'question_mark',
                 text: 'Questions',
                 children: [
-                  {icon: 'add', text: 'Add', href: '#'},
-                  {icon: 'edit', text: 'Edit', href: '#'},
-                  {icon: 'menu', text: 'See All', href: '#'}
+                  {icon: 'add', text: 'Add', rhref: '/questions/add', href: '/questions/add'},
+                  {icon: 'edit', text: 'Edit', rhref: '/questions/add', href: '/questions/add'},
+                  {icon: 'menu', text: 'See All', rhref: '/questions/add', href: '/questions/add'}
                 ]
               },
               {
@@ -134,7 +135,7 @@
                   {icon: 'edit', text: 'Edit', href: '#'},
                   {icon: 'menu', text: 'See All', href: '#'}
                 ]
-              },
+              }
             ]
           },
           {
@@ -164,13 +165,13 @@
                 text: 'Session',
                 children: [
                   {icon: 'Logout', text: 'Logout', href: '#'},
-                  {icon: 'edit', text: 'Edit', href: '#'},
+                  {icon: 'edit', text: 'Edit', href: '#'}
                 ]
               }
             ]
           }
         ]
-      }"></app-sidenav>
+      }" ></app-sidenav>
     </div>
     <div class="pageContainer">
   

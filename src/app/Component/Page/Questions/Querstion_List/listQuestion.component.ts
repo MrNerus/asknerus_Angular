@@ -8,16 +8,16 @@ import customConfig from '../../../../../customConfig.json';
 import { ToggleComponent } from '../../../../Element/Toggle/toggle.component';
 
 @Component({
-    selector: 'app-listClassrooom',
-    styleUrl: './listClassroom.component.css',
-    templateUrl: './listClassroom.component.html',
+    selector: 'app-listQuestion',
+    styleUrl: './listQuestion.component.css',
+    templateUrl: './listQuestion.component.html',
     standalone: true,
     // inputs: ['props'],
     imports: [SanitizeHtmlPipe, TextBoxComponent, IconButtonComponent, DropdownComponent, ToggleComponent, FormsModule],
     // encapsulation: ViewEncapsulation.None
 })
 
-export class listClassroomComponent {
+export class ListQuestionomponent {
     // @Input({ required: true }) props: Partial<ITemplate> = {};
 
     ngOnInit(): void {

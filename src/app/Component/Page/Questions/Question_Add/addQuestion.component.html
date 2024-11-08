@@ -1,0 +1,65 @@
+<main class="padding">
+    <form action="/api/add" method="post" #form_AddClassroom="ngForm" class="flex vertical align_center gap borderRadius paddingHalf" id="addClassroomForm">
+      <p class="width100">Add Question</p>
+      <hr class="width100">
+      <div class="grid gridCol3 width100">
+        <label for="Class" class="self_align_center ">Parent:</label>
+        <app-dropdown class="width100 span2Right"/>
+      </div>
+      <div class="grid gridCol3 width100">
+        <label for="Class" class="self_align_center ">Class:</label>
+        <app-dropdown class="width100 span2Right"/>
+      </div>
+      <div class="grid gridCol3 width100">
+        <label for="Class" class="self_align_center ">Subject:</label>
+        <app-dropdown class="width100 span2Right"/>
+      </div>
+      <div class="grid gridCol3 width100">
+        <label for="Class" class="self_align_center ">Chapter:</label>
+        <app-dropdown class="width100 span2Right"/>
+      </div>
+      <div class="grid gridCol3 width100">
+        <label for="QuestionCode" class="self_align_center">Question Code:</label>
+        <app-textBox [props]="{
+            regex: '[A-Za-z0-9]+', placeholder: 'Enter Question Code', type: 'text', icon: 'add', tooltip: 'A-Z, a-z, 0-9', name: 'QuestionCode',
+            id: 'QuestionCode', isRequired: true
+        }" class="width100 span2Right" />
+      </div>
+      <div class="grid gridCol3 width100">
+        <label for="QSCCode" class="self_align_center">Question Common Code:</label>
+        <app-textBox [props]="{
+            regex: '[A-Za-z0-9]+', placeholder: 'Enter Question Common Code', type: 'text', icon: 'add', tooltip: 'A-Z, a-z, 0-9', name: 'QSCCode',
+            id: 'QSCCode', isRequired: true
+        }" class="width100 span2Right" />
+      </div>
+      
+      <div class="grid gridCol3 width100">
+        <label for="Question" class="self_align_center">Question:</label>
+        <app-textBox [props]="{
+            regex: '[A-Za-z0-9]+', placeholder: 'Enter Question. Markdown supported', type: 'text', label: '', icon: 'add', tooltip: 'A-Z, a-z, 0-9', name: 'Question',
+          id: 'Question', isRequired: true
+        }" class="width100 span2Right" />
+      </div>
+      <div class="grid gridCol3 width100">
+        <label for="IsActive" class="self_align_center">Is Active:</label>
+        <div class="width100 span2Right">
+          <app-Slider [props]="{'min':1, 'max':5, 'step':1, 'value':3, 'isReadonly':false, 'id':'Bias_Importance', 'name':'Bias_Importance'}" class="width100"></app-Slider>
+        </div>
+      </div>
+      <div class="grid gridCol3 width100">
+        <label for="IsActive" class="self_align_center">Is Active:</label>
+        <div class="width100 span2Right">
+          <app-toggle [props]="{id: 'IsActive', name: 'IsActive', isChecked: true}" />
+        </div>
+      </div>
+      
+
+      
+      <div class="grid gridCol3 gap width100">
+        <app-icon-button [props]="{'icon': 'clear_all', 'text': 'Clear All', 'type': 'capsule'}" onClick="document.getElementById('addClassroomForm').reset();" />
+        <app-icon-button [props]="{'icon': 'keyboard_backspace', 'text': 'Back', 'type': 'capsule'}" onClick="window.location = '/classroom/list'"/>
+        <app-icon-button [props]="{'icon': 'Add', 'text': 'Add', 'type': 'capsule'}" onclick = "submit()"/>
+      </div>
+
+    </form>
+</main>

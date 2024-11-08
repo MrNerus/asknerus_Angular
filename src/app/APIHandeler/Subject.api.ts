@@ -2,7 +2,6 @@ import { Observable } from "rxjs";
 import customConfig from '../../customConfig.json';
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { IListClassroom } from "../Component/Page/classroom/listClassroom/listClassroom.component";
 
 @Injectable({providedIn: 'root'})
 export class SubjectList {
