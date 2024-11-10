@@ -1,5 +1,13 @@
+import { IPagination } from "./IPagination"
+
 export interface IClassroom {
-    Code?: string,
-    Name?: string,
-    IsActive?: boolean
+    sn?: number,
+    code?: string,
+    name?: string,
+    isActive?: boolean
+}
+
+export interface IClassrooms {
+    item1?: IClassroom[],
+    item2?: IPagination
 }

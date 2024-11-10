@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, forwardRef, Input, ViewEncapsulation } from '@angular/core';
 import { SanitizeHtmlPipe } from "../../Pipe/sanitizer";
 
 @Component({
@@ -8,11 +8,12 @@ import { SanitizeHtmlPipe } from "../../Pipe/sanitizer";
     standalone: true,
     inputs: ['props'],
     imports: [SanitizeHtmlPipe],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
 })
 
 export class TextBoxComponent {
     @Input({ required: true }) props: Partial<ITextBox> = {};
+    
 
 
     attr_regex: string        = '';
@@ -47,10 +48,14 @@ export class TextBoxComponent {
         this.universal_textBox = `
         <div class="universal-textbox ${this.attr_class_isReadonly}">
           ${this.attr_icon}
-          <input ${this.attr_regex} ${this.attr_placeholder} ${this.attr_value} ${this.attr_type} ${this.attr_label} ${this.attr_name} ${this.attr_id} ${this.attr_isRequired} ${this.attr_isReadonly}/>
+          <input ${this.attr_regex} ${this.attr_placeholder} ${this.attr_value} ${this.attr_type} ${this.attr_label} ${this.attr_name} ${this.attr_id} ${this.attr_isRequired} ${this.attr_isReadonly} />
           ${this.attr_tooltip}
         </div>
         `;
+    }
+
+    get value(): string {
+        return (document.getElementById(this.props.id) as HTMLInputElement).value;
     }
 };
 

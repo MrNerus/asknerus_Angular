@@ -93,6 +93,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .self_justify_center {justify-self: center;}
 .self_justify_end {justify-self: flex-end;}
 .self_center { align-self: center; justify-self: center;}
+.text_center { text-align: center; }
+.text_left { text-align: left;}
+.text_right { text-align: right;}
+.text_top { vertical-align: top;}
+.text_middle {vertical-align: middle;}
+.text_bottom {vertical-align: bottom;}
+.text_super {vertical-align: super;}
+.text_sub {vertical-align: sub;}
 
 .grid { display: grid; }
 .gridCol1 { grid-template-columns: 1fr; }
@@ -188,12 +196,32 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .span5Right {grid-column: span 5;}
 .span6Right {grid-column: span 6;}
 
+.span1Down {grid-row: span 1;}
+.span2Down {grid-row: span 2;}
+.span3Down {grid-row: span 3;}
+.span4Down {grid-row: span 4;}
+.span5Down {grid-row: span 5;}
+.span6Down {grid-row: span 6;}
+
 .flexGrow { flex-grow: 1;}
 .flexGrowNot { flex-grow: 0;}
 .flexShrink { flex-shrink:1; }
 .flexShrinkNot {flex-shrink: 0; }
 
-.bordeRadius_Quarter { border-radius: 0.25rem; }
-.bordeRadius_Half { border-radius: 0.5rem; }
-.bordeRadius { border-radius: 1rem; }
-.bordeRadius_2 { border-radius: 2rem; }
+.borderRadius_Quarter { border-radius: 0.25rem; }
+.borderRadius_Half { border-radius: 0.5rem; }
+.borderRadius { border-radius: 1rem; }
+.borderRadius_2 { border-radius: 2rem; }
+
+
+
+.card {
+  box-shadow: 0.5rem 0.5rem 0.5rem color-mix(in srgb, var(--dark) 80%, #00000000 20%),
+              -0.5rem -0.5rem 0.5rem color-mix(in srgb, var(--dark) 20%, #00000000 80%);
+}
+.cardOnHover:hover {
+  box-shadow: 0.5rem 0.5rem 0.5rem color-mix(in srgb, var(--dark) 80%, #00000000 20%),
+              -0.5rem -0.5rem 0.5rem color-mix(in srgb, var(--dark) 20%, #00000000 80%);
+}
+
+/* table { border-collapse: collapse; } */

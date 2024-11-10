@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { addClassroomComponent } from './Component/Page/classroom/addClassroom/addClassroom.component';
 import { editClassroomComponent } from './Component/Page/classroom/editClassroom/editClassroom.component';
-import { viewClassroomComponent } from './Component/Page/classroom/viewClassroom/viewClassroom.component';
+import { ViewClassroomComponent } from './Component/Page/classroom/viewClassroom/viewClassroom.component';
 import { addSubjectComponent } from './Component/Page/Subjects/Subject_Add/addSubject.component';
 import { EditSubjectComponent } from './Component/Page/Subjects/Subject_Edit/editSubject.component';
 import { ViewSubjectComponent } from './Component/Page/Subjects/Subject_View/viewSubject.component';
@@ -18,8 +18,8 @@ import { ListQuestionomponent } from './Component/Page/Questions/Querstion_List/
 
 export const routes: Routes = [
     { path: 'classroom/add', component: addClassroomComponent },
-    { path: 'classroom/edit', component: editClassroomComponent },
-    { path: 'classroom/view/:code', component: viewClassroomComponent },
+    { path: 'classroom/edit/:code', component: editClassroomComponent },
+    { path: 'classroom/view/:code', component: ViewClassroomComponent },
     { path: 'classroom', component: listClassroomComponent },
     
     { path: 'subjects/add', component: addSubjectComponent },
