@@ -17,26 +17,19 @@ import { ChapterList } from '../../APIHandeler/Chapter.api';
 export class DropdownComponent {
   @Input({ required: true }) props: Partial<IDropDown> = {}
   _props: IDropDown;
-  // classes: any[] = []
-  // // subjects: any[] = []
-  // // chapters: any[] = []
-
-  // constructor() { }
 
   ngOnInit(): void { 
     this._props = this.props;
-    // this.classes = ClassList.getClassList() 
   }
 
-  // onClassSelect(classes){
-  //   console.log(classes.target.value)
-  //   // this.subjects = SubjectList.getSubjectList(classes.target.value);
-  //   // this.chapters = [];
-  // }
-
-  // onSubjectSelect(subjects){
-  //   // this.chapters = ChapterList.getChapterList(subjects.target.value);
-  // }
+  get text(): string {
+    var dropdown = document.getElementById(this.props.id) as HTMLSelectElement; 
+    return dropdown.options[dropdown.selectedIndex].text; 
+  }
+  get value(): string {
+    var dropdown = document.getElementById(this.props.id) as HTMLSelectElement; 
+    return dropdown.value; 
+  }
 
 }
 

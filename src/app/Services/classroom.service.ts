@@ -17,7 +17,7 @@ export class ClassroomService {
 
   getClassrooms(
     searchKeyword: string = "%",
-    searchColumn: string = null,
+    searchColumn: number = null,
     filterKeyword: string = "%",
     filterColumn: string = null,
     where_Clause: string = null,
@@ -45,5 +45,8 @@ export class ClassroomService {
 
   updateClassroom(classroom: IClassroom): Observable<void> {
     return this.http.post<void>(`${customConfig.backend_URL}/classroom/edit`, classroom)
+  }
+  addClassroom(classroom: IClassroom): Observable<void> {
+    return this.http.post<void>(`${customConfig.backend_URL}/classroom/add`, classroom)
   }
 }

@@ -9,48 +9,58 @@
         <p class="width100">Filter Options: </p>
         <hr class="width100">
         <form  class="grid gridCol2 gap">
-          <app-textBox [props]="{icon:'search', placeholder:'Search...'}" class="span2Right" />
+          <app-textBox [props]="{icon:'search', placeholder:'Search...', id:'searckKey', name:'searchKey'}" class="span2Right" #c_SearchKeyword/>
           <label for="searchOn" class="text_left text_center">Search On</label>
-          <app-dropdown [props]="{id: 'searchOn', name:'searchOn', allowNone: true, options: [{value:'2', text:'Code'}, {value:'3', text:'Name'}]}"></app-dropdown>
+          <app-dropdown [props]="{id: 'searchOn', name:'searchOn', allowNone: true, options: [{value:'2', text:'Code'}, {value:'3', text:'Name'}]}" #c_SearchColumn></app-dropdown>
 
           <label for="onlyActive text_left text_center">Only Active</label>
-          <app-toggle [props]="{name: 'onlyActive', id:'onlyActive', isChecked:false}" />
+          <app-toggle [props]="{name: 'onlyActive', id:'onlyActive', isChecked:false}" #c_filterOut/>
 
           <label for="sortBy" class="text_left text_center">Sort By</label>
-          <app-dropdown [props]="{id: 'sortBy', name:'sortBy', allowNone: true, options: [{value:'2', text:'Code', isDefault:true}, {value:'3', text:'Name'}]}"></app-dropdown>
+          <app-dropdown [props]="{id: 'sortBy', name:'sortBy', allowNone: true, options: [{value:'2', text:'Code', isDefault:true}, {value:'3', text:'Name'}]}" #c_SortColumn></app-dropdown>
           <label for="sortMode" class="text_left text_center">Sort Mode</label>
-          <app-dropdown [props]="{id: 'sortMode', name:'sortMode', allowNone: true, options: [{value:'1', text:'Ascending', isDefault:true}, {value:'2', text:'Descending'}]}"></app-dropdown>
+          <app-dropdown [props]="{id: 'sortMode', name:'sortMode', allowNone: true, options: [{value:'1', text:'Ascending', isDefault:true}, {value:'2', text:'Descending'}]}" #c_SortMode></app-dropdown>
           
           <label for="rowsPerPage" class="text_left text_center">Rows Per Page</label>
-          <app-textBox [props]="{type: 'number', name: 'rowsPerPage', id: 'rowsPerPage', value: '20'}" />
-          <app-icon-button [props]="{icon: 'filter_list', text:'Filter', type:'capsule'}" class="span2Right"/>
+          <app-textBox [props]="{type: 'number', name: 'rowsPerPage', id: 'rowsPerPage', value: '20'}" #c_RowsPerPage/>
+          <app-icon-button [props]="{icon: 'filter_list', text:'Filter', type:'capsule'}" class="span2Right" (click)="filter()"/>
 
         </form>
       </div>
       <div class="card padding borderRadius">
-        <p class="width100">Classes: </p>
-        <hr class="width100">
-        <table class="width100 borderLightGray borderSolid borderHalf borderRadius padding">
-          <tr>
-            <th class="paddingHalf marginVerticalHalf text_middle text_center">S.N.</th>
-            <th class="paddingHalf marginVerticalHalf text_middle text_center">Code</th>
-            <th class="paddingHalf marginVerticalHalf text_middle text_left">Name</th>
-            <th class="paddingHalf marginVerticalHalf text_middle text_center">Status</th>
-            <th class="paddingHalf marginVerticalHalf text_middle text_center">Controlls</th>
-          </tr>
-          <tr *ngFor="let classroom of classList" class="cardOnHover borderRadius">
-            <td class="paddingHalf marginVerticalHalf text_middle text_center">{{ classroom.sn }}</td>
-            <td class="paddingHalf marginVerticalHalf text_middle text_center">{{ classroom.code }}</td>
-            <td class="paddingHalf marginVerticalHalf text_middle text_left">{{ classroom.name }}</td>
-            <td class="paddingHalf marginVerticalHalf text_middle text_center">{{ classroom.isActive ? "Active" : "Inactive" }}</td>
-            <td class="paddingHalf marginVerticalHalf flex horizontal gapHalf center"><app-icon-button [props]="{'icon': 'visibility', 'text': '', 'type': 'capsule'}" (click)="navigateTo('view', classroom.code)"/><app-icon-button [props]="{'icon': 'edit', 'text': '', 'type': 'capsule'}" (click)="navigateTo('edit', classroom.code)"/></td>
-
-          </tr>
-        </table>
+        <div *ngIf="loading_list; else listLoaded">
+          Loading classroom data...
+        </div>
+        <ng-template #listLoaded>
+          <p class="width100">Classes: </p>
+          <hr class="width100">
+          <table class="width100 borderLightGray borderSolid borderHalf borderRadius padding">
+            <tr>
+              <th class="paddingHalf marginVerticalHalf text_middle text_center">S.N.</th>
+              <th class="paddingHalf marginVerticalHalf text_middle text_center">Code</th>
+              <th class="paddingHalf marginVerticalHalf text_middle text_left">Name</th>
+              <th class="paddingHalf marginVerticalHalf text_middle text_center">Status</th>
+              <th class="paddingHalf marginVerticalHalf text_middle text_center">Controlls</th>
+            </tr>
+            <tr *ngFor="let classroom of classList" class="cardOnHover borderRadius">
+              <td class="paddingHalf marginVerticalHalf text_middle text_center">{{ classroom.sn }}</td>
+              <td class="paddingHalf marginVerticalHalf text_middle text_center">{{ classroom.code }}</td>
+              <td class="paddingHalf marginVerticalHalf text_middle text_left">{{ classroom.name }}</td>
+              <td class="paddingHalf marginVerticalHalf text_middle text_center">{{ classroom.isActive ? "Active" : "Inactive" }}</td>
+              <td class="paddingHalf marginVerticalHalf flex horizontal gapHalf center"><app-icon-button [props]="{'icon': 'visibility', 'text': '', 'type': 'capsule'}" (click)="navigateTo('view', classroom.code)"/><app-icon-button [props]="{'icon': 'edit', 'text': '', 'type': 'capsule'}" (click)="navigateTo('edit', classroom.code)"/></td>
+              
+            </tr>
+          </table>
+        </ng-template>
       </div>
       <div class="card flex center padding borderRadius">
-        <app-pages [props]=pages></app-pages>
-        <p>showing {{pages.rows_Count}} results out of {{pages.total_Rows}}</p>
+        <div *ngIf="loading_list; else listLoaded_pages">
+          Loading classroom data...
+        </div>
+        <ng-template #listLoaded_pages>
+          <app-pages [props]="{page_Number: pages.page_Number, max_Page: pages.max_Page, rows_Count: pages.rows_Count, rows_Per_Page: pages.rows_Per_Page, total_Rows: pages.total_Rows}" (pageChange)="onPageChange($event)" #c_Page></app-pages>
+          <p>showing {{pages.rows_Count}} results out of {{pages.total_Rows}}</p>
+        </ng-template>
       </div>
     </div>
     </ng-template>

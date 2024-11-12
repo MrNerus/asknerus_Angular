@@ -1,6 +1,6 @@
 <div>
   <select name={{_props.name}} id={{_props.id}}>
-    <option value="" *ngIf="_props.allowNone === true"></option>
+    <option value="_" *ngIf="_props.allowNone === true"></option>
     <option *ngFor="let option of _props.options" value={{option.value}} selected={{option.isDefault}}>{{option.text}}</option>
   </select>
   <!-- <select (change)="onSubjectSelect($event)" name="subject" id="subject">

@@ -1,6 +1,6 @@
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:2700584207.
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:1760960967.
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 import { SanitizeHtmlPipe } from "../../Pipe/sanitizer";
 import { IPagination } from '../../Interfaces/IPagination';
 import { IconButtonComponent } from "../iconButton/iconButton.component";
@@ -25,6 +25,8 @@ export class PaginatorComponent {
     pages: number[] = [null,null,-5,-4,-3,-2,-1,0,1,2,3,4,5,null,null]
 
     @Input({ required: true }) props: Partial<IPagination> = {}
+    @Output() pageChange = new EventEmitter<number>();
+
         
     ngOnInit(): void {
         this.page_Number = this.props.page_Number ?? 1;
@@ -47,14 +49,15 @@ export class PaginatorComponent {
         let startPage = Math.max(1, currentPage - sidePages);
         let endPage = Math.min(totalPages, currentPage + sidePages);
     
-        if (endPage - startPage + 1 < paginationRange) {
-            if (startPage === 1) { endPage = Math.min(totalPages, startPage + paginationRange - 1); } 
-            else if (endPage === totalPages) { startPage = Math.max(1, endPage - paginationRange + 1); }
-        }
+        if (currentPage <= sidePages + 1 ) { startPage = 1; }
+        else { startPage = Math.max(1, currentPage - sidePages); }
+        
+        if (currentPage >= totalPages - sidePages ) { endPage = totalPages; }
+        else { endPage = Math.min(totalPages, currentPage + sidePages); }
     
-        const pages: number[] = [];
+        var pages: number[] = [];
         for (let i = startPage; i <= endPage; i++) {
-        pages.push(i);
+            pages.push(i);
         }
     
         return pages;
@@ -62,6 +65,32 @@ export class PaginatorComponent {
 
     get value(): number {
         return this.page_Number;
+    }
+
+    ToFirst() {
+        this.page_Number = 1;
+        this.pageChange.emit(this.page_Number)
+    }
+
+    ToLast() {
+        this.page_Number = this.max_Page;
+        this.pageChange.emit(this.page_Number);
+    }
+    
+    ToLeft() {
+        this.page_Number = Math.max(1, this.page_Number - 1);
+        this.pageChange.emit(this.page_Number);
+    }
+    
+    ToRight() {
+        this.page_Number = Math.min(this.max_Page, this.page_Number + 1);
+        this.pageChange.emit(this.page_Number);
+    }
+    
+    ToThis(num: number) {
+        this.page_Number = Math.max(1, num);
+        this.page_Number = Math.min(this.max_Page, num);
+        this.pageChange.emit(this.page_Number);
     }
 }
 
