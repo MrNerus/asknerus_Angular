@@ -4,19 +4,19 @@
       <hr class="width100">
       <div class="grid gridCol3 width100">
         <label for="Class" class="self_align_center ">Parent:</label>
-        <app-dropdown class="width100 span2Right"/>
+        <app-dropdown class="width100 span2Right" [props]="{}"/>
       </div>
       <div class="grid gridCol3 width100">
         <label for="Class" class="self_align_center ">Class:</label>
-        <app-dropdown class="width100 span2Right"/>
+        <app-dropdown class="width100 span2Right" [props]="{}"/>
       </div>
       <div class="grid gridCol3 width100">
         <label for="Class" class="self_align_center ">Subject:</label>
-        <app-dropdown class="width100 span2Right"/>
+        <app-dropdown class="width100 span2Right" [props]="{}"/>
       </div>
       <div class="grid gridCol3 width100">
         <label for="Class" class="self_align_center ">Chapter:</label>
-        <app-dropdown class="width100 span2Right"/>
+        <app-dropdown class="width100 span2Right" [props]="{}"/>
       </div>
       <div class="grid gridCol3 width100">
         <label for="QuestionCode" class="self_align_center">Question Code:</label>
@@ -36,7 +36,7 @@
       <div class="grid gridCol3 width100">
         <label for="Question" class="self_align_center">Question:</label>
         <app-textBox [props]="{
-            regex: '[A-Za-z0-9]+', placeholder: 'Enter Question. Markdown supported', type: 'text', label: '', icon: 'add', tooltip: 'A-Z, a-z, 0-9', name: 'Question',
+            regex: '[A-Za-z0-9]+', placeholder: 'Enter Question. Markdown supported', type: 'text', icon: 'add', tooltip: 'A-Z, a-z, 0-9', name: 'Question',
           id: 'Question', isRequired: true
         }" class="width100 span2Right" />
       </div>

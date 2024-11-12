@@ -15,14 +15,14 @@ export class Classes {
     // }
 
     classList: IClassroom[] = [
-        { Name:"First Semester", Code: "BCAS1", IsActive: true},
-        { Name:"Second Semester", Code: "BCAS2", IsActive: true},
-        { Name:"Third Semester", Code: "BCAS3", IsActive: true},
-        { Name:"Fourth Semester", Code: "BCAS4", IsActive: true},
-        { Name:"Fifth Semester", Code: "BCAS5", IsActive: true},
-        { Name:"Sixth Semester", Code: "BCAS6", IsActive: true},
-        { Name:"Seventh Semester", Code: "BCAS7", IsActive: true},
-        { Name:"Eighth Semester", Code: "BCAS8", IsActive: true}
+        // { Name:"First Semester", Code: "BCAS1", IsActive: true},
+        // { Name:"Second Semester", Code: "BCAS2", IsActive: true},
+        // { Name:"Third Semester", Code: "BCAS3", IsActive: true},
+        // { Name:"Fourth Semester", Code: "BCAS4", IsActive: true},
+        // { Name:"Fifth Semester", Code: "BCAS5", IsActive: true},
+        // { Name:"Sixth Semester", Code: "BCAS6", IsActive: true},
+        // { Name:"Seventh Semester", Code: "BCAS7", IsActive: true},
+        // { Name:"Eighth Semester", Code: "BCAS8", IsActive: true}
     ];
 
     async getClassList(): Promise<IClassroom[]> {
@@ -50,7 +50,7 @@ export class Classes {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ Name: classroom.Name , Code: classroom.Code, IsActive: classroom.IsActive }),
+                body: JSON.stringify({ Name: classroom.name , Code: classroom.code, IsActive: classroom.isActive }),
             });
             if (!response.ok) { 
                 return JSON.parse(

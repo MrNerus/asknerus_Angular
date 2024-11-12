@@ -1,7 +1,7 @@
 <div>
-  <select (change)="onClassSelect($event)" name="class" id="class">
-    <option value="">Select Class</option>
-    <option *ngFor="let class of classes" value="{{class.id}}">{{class.name}}</option>
+  <select name={{_props.name}} id={{_props.id}}>
+    <option value="_" *ngIf="_props.allowNone === true"></option>
+    <option *ngFor="let option of _props.options" value={{option.value}} selected={{option.isDefault}}>{{option.text}}</option>
   </select>
   <!-- <select (change)="onSubjectSelect($event)" name="subject" id="subject">
     <option value="">Select Subject</option>

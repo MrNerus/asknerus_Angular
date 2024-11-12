@@ -36,6 +36,10 @@ export class ToggleComponent {
         </label>
         `
     }
+
+    get value(): boolean {
+        return (document.getElementById(this.props.id) as HTMLInputElement).checked;
+    }
 };
 
 export interface IToggle {

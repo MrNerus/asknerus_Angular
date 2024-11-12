@@ -4,11 +4,11 @@
       <hr class="width100">
       <div class="grid gridCol3 width100">
         <label for="Class" class="self_align_center ">Class:</label>
-        <app-dropdown class="width100 span2Right"/>
+        <app-dropdown class="width100 span2Right" [props]="{}"/>
       </div>
       <div class="grid gridCol3 width100">
         <label for="Class" class="self_align_center ">Subject:</label>
-        <app-dropdown class="width100 span2Right"/>
+        <app-dropdown class="width100 span2Right" [props]="{}"/>
       </div>
       <div class="grid gridCol3 width100">
         <label for="ChapterCode" class="self_align_center">Chapter Code:</label>
@@ -21,7 +21,7 @@
       <div class="grid gridCol3 width100">
         <label for="ChapterName" class="self_align_center">Chapter Name:</label>
         <app-textBox [props]="{
-            regex: '[A-Za-z0-9]+', placeholder: 'Enter Chapter Name', type: 'text', label: '', icon: 'add', tooltip: 'A-Z, a-z, 0-9', name: 'SubjectName',
+            regex: '[A-Za-z0-9]+', placeholder: 'Enter Chapter Name', type: 'text', icon: 'add', tooltip: 'A-Z, a-z, 0-9', name: 'SubjectName',
           id: 'ChapterName', isRequired: true
         }" class="width100 span2Right" />
       </div>

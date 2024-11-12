@@ -1,5 +1,7 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, forwardRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { SanitizeHtmlPipe } from "../../Pipe/sanitizer";
+import { CommonModule } from '@angular/common';
+
 
 @Component({
     selector: 'app-textBox',
@@ -7,50 +9,50 @@ import { SanitizeHtmlPipe } from "../../Pipe/sanitizer";
     templateUrl: 'textBox.component.html',
     standalone: true,
     inputs: ['props'],
-    imports: [SanitizeHtmlPipe],
-    encapsulation: ViewEncapsulation.None
+    imports: [SanitizeHtmlPipe, CommonModule],
+    encapsulation: ViewEncapsulation.None,
 })
 
 export class TextBoxComponent {
     @Input({ required: true }) props: Partial<ITextBox> = {};
+
+    @ViewChild('d_input') d_input!: ElementRef<HTMLInputElement> ;
 
 
     attr_regex: string        = '';
     attr_placeholder: string  = '';
     attr_value: string        = '';
     attr_type: string         = '';
-    attr_label: string        = '';
-    attr_icon: string         = '';
-    attr_tooltip: string      = '';
     attr_name: string         = '';
     attr_id: string           = '';
-    attr_isRequired: string   = '';
-    attr_isReadonly: string   = '';
-    attr_class_isReadonly: string   = '';
-    universal_textBox: string = '';
+    attr_isRequired: boolean  = false;
+    attr_isReadonly: boolean  = false;
+
+    ele_icon: string         = '';
+    ele_tooltip: string      = '';
 
     ngOnInit(): void {
         console.log(this.props);
-        this.attr_regex       = this.props.regex       ? `pattern = '${this.props.regex}'`                                  : '';
-        this.attr_placeholder = this.props.placeholder ? `placeholder = '${this.props.placeholder}'`                        : '';
-        this.attr_value       = this.props.value       ? `value = '${this.props.value}'`                                    : '';
-        this.attr_type        = this.props.type        ? `type = '${this.props.type}'`                                      : '';
-        this.attr_label       = this.props.label       ? `label = '${this.props.label}'`                                    : '';
-        this.attr_icon        = this.props.icon        ? `<span class="material-symbols-rounded">${this.props.icon}</span>` : '';
-        this.attr_tooltip     = this.props.tooltip     ? `<div class="tooltip">${this.props.tooltip}</div>`                 : '';
-        this.attr_name        = this.props.name        ? `name = '${this.props.name}'`                                      : '';
-        this.attr_id          = this.props.id          ? `id = '${this.props.id}'`                                          : '';
-        this.attr_isRequired  = this.props.isRequired  ? `required`                                                         : '';
-        this.attr_isReadonly  = this.props.isReadonly  ? `readonly`                                                         : '';
-        this.attr_class_isReadonly  = this.props.isReadonly  ? `cursor_readonly`                                                   : '';
+        this.attr_regex       = this.props.regex != null       ? this.props.regex : '';
+        this.attr_placeholder = this.props.placeholder != null ? this.props.placeholder : '';
+        this.attr_value       = this.props.value != null       ? this.props.value : '';
+        this.attr_type        = this.props.type != null        ? this.props.type : '';
+        this.attr_name        = this.props.name != null        ? this.props.name : '';
+        this.attr_id          = this.props.id != null          ? this.props.id : '';
+        this.attr_isRequired  = this.props.isRequired != null;
+        this.attr_isReadonly  = this.props.isReadonly != null;
 
-        this.universal_textBox = `
-        <div class="universal-textbox ${this.attr_class_isReadonly}">
-          ${this.attr_icon}
-          <input ${this.attr_regex} ${this.attr_placeholder} ${this.attr_value} ${this.attr_type} ${this.attr_label} ${this.attr_name} ${this.attr_id} ${this.attr_isRequired} ${this.attr_isReadonly}/>
-          ${this.attr_tooltip}
-        </div>
-        `;
+        this.ele_icon        = this.props.icon != null         ? this.props.icon : '';
+        this.ele_tooltip     = this.props.tooltip != null      ? this.props.tooltip : '';
+    }
+
+    get value(): string {
+        console.log(this.d_input.nativeElement.value)
+        return this.d_input.nativeElement.value;
+    }
+
+    set value(value: string) {
+        this.d_input.nativeElement.value = value;
     }
 };
 
@@ -59,7 +61,6 @@ export interface ITextBox {
     placeholder?: string,
     value?: string,
     type?: string,
-    label?: string,
     icon?: string,
     tooltip?: string,
     name?: string,

@@ -1,36 +1,41 @@
 <main class="padding">
-    <form action="/api/add" method="post" #form_AddClassroom="ngForm" class="flex vertical align_center gap borderRadius paddingHalf" id="editClassroomForm">
+  <div *ngIf="loading; else dataLoaded">
+    Loading classroom data...
+  </div>
+  <ng-template #dataLoaded>
+    <form action="/api/edit" method="post" #form_EditClassroom="ngForm" class="flex vertical align_center gap borderRadius paddingHalf" id="editClassroomForm">
       <p class="width100">Edit Class</p>
       <hr class="width100">
       <div class="grid gridCol3 width100">
         <label for="Code" class="self_align_center">Class Code:</label>
         <app-textBox [props]="{
-            regex: '[A-Za-z0-9]+', placeholder: 'Enter Class Code', type: 'text', icon: 'add', tooltip: 'A-Z, a-z, 0-9', name: 'class', value:classCode,
+            regex: '[^\s][A-z0-9_\s]+', placeholder: 'Enter Class Code', type: 'text', icon: 'visibility', tooltip: 'A-Z, a-z, 0-9', name: 'class', value:classCode,
             id: 'Code', isRequired: true, isReadonly: true
-        }" class="width100 span2Right" />
+        }" class="width100 span2Right" name="code" #classCodeTextBox/>
       </div>
       
       <div class="grid gridCol3 width100">
         <label for="Name" class="self_align_center">Class Name:</label>
         <app-textBox [props]="{
-            regex: '[A-Za-z0-9]+', placeholder: 'Enter Class Name', type: 'text', label: '', icon: 'add', tooltip: 'A-Z, a-z, 0-9', name: 'class',
+            regex: '[a-zA-Z0-9_ ]*', placeholder: 'Enter Class Name', type: 'text', icon: 'edit', tooltip: 'A-Z, a-z, 0-9', name: 'class', value:className,
           id: 'Name', isRequired: true
-        }" class="width100 span2Right" />
+        }" class="width100 span2Right" name="name" #classNameTextBox/>
       </div>
 
       <div class="grid gridCol3 width100">
         <label for="IsActive" class="self_align_center">Is Active:</label>
         <div class="width100 span2Right">
-          <app-toggle [props]="{id: 'classroomToggle', name: 'classroomToggle', isChecked: true}" />
+          <app-toggle [props]="{id: 'classroomToggle', name: 'classroomToggle', isChecked: isActive}" name="isActive" #classStatusToggle/>
         </div>
       </div>
 
       
       <div class="grid gridCol3 gap width100">
         <app-icon-button [props]="{'icon': 'clear_all', 'text': 'Clear All', 'type': 'capsule'}" onClick="document.getElementById('editClassroomForm').reset();" />
-        <app-icon-button [props]="{'icon': 'keyboard_backspace', 'text': 'Back', 'type': 'capsule'}" onClick="window.location = '/classroom/list'"/>
-        <app-icon-button [props]="{'icon': 'Save', 'text': 'Save', 'type': 'capsule'}" onclick = "submit()"/>
+        <app-icon-button [props]="{'icon': 'keyboard_backspace', 'text': 'Back', 'type': 'capsule'}" (click)="navigateTo('', '')"/>
+        <app-icon-button [props]="{'icon': 'Save', 'text': 'Save', 'type': 'capsule'}" (click)="submit()" class="check_valid"/>
       </div>
 
     </form>
+  </ng-template>
 </main>
