@@ -32,7 +32,6 @@ export class TextBoxComponent {
     ele_tooltip: string      = '';
 
     ngOnInit(): void {
-        console.log(this.props);
         this.attr_regex       = this.props.regex != null       ? this.props.regex : '';
         this.attr_placeholder = this.props.placeholder != null ? this.props.placeholder : '';
         this.attr_value       = this.props.value != null       ? this.props.value : '';
@@ -47,7 +46,6 @@ export class TextBoxComponent {
     }
 
     get value(): string {
-        console.log(this.d_input.nativeElement.value)
         return this.d_input.nativeElement.value;
     }
 

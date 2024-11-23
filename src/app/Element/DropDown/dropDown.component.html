@@ -1,5 +1,6 @@
 <div>
-  <select name={{_props.name}} id={{_props.id}}>
+  <input hidden type="text" value = {{_props.options[0].value}} #h_input/>
+  <select #d_select name={{_props.name}} id={{_props.id}} [attr.disabled]="_props.isReadonly ?? _props.isReadonly">
     <option value="_" *ngIf="_props.allowNone === true"></option>
     <option *ngFor="let option of _props.options" value={{option.value}} selected={{option.isDefault}}>{{option.text}}</option>
   </select>
