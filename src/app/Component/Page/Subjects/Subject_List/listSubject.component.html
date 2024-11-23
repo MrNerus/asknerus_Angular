@@ -1,3 +1,118 @@
-<main class="padding">
 
-</main>
+<main class="padding">
+    <div *ngIf="loading; else dataLoaded">
+      Loading classroom data...
+    </div>
+    <ng-template #dataLoaded>
+      <div class="grid gridCol4 gap width100 heigh100" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
+        <div class="span2Down card padding borderRadius">
+          <p class="width100">Filter Options: </p>
+          <hr class="width100 marginTop marginBottom">
+          <form  class="grid gridCol3 gap" style="grid-template-columns: auto 1fr auto">
+            <p>Search</p>
+            <hr class="width100 marginTop marginBottom span2Right">
+
+            <app-textBox [props]="{icon:'search', placeholder:'Search...', id:'searckKey', name:'searchKey'}" class="span3Right" #c_SearchKeyword/>
+            
+            <p>Filter:</p>
+            <hr class="width100 marginTop marginBottom span2Right">
+            
+            <label for="searchByCode" class="text_left text_center">Code</label>
+            <app-textBox [props]="{icon:'search', placeholder:'Code', id:'searchByCode', name:'searchByCode'}" #c_SearchByCode/>
+            <app-toggle [props]="{name: 'searchByCode_isFuzzy', id:'searchByCode_isFuzzy', isChecked:true}" #c_SearchByCode_isFuzzy/>
+
+            <label for="searchByName" class="text_left text_center">Name</label>
+            <app-textBox [props]="{icon:'search', placeholder:'Name', id:'searchByName', name:'searchByName'}" #c_SearchByName/>
+            <app-toggle [props]="{name: 'searchByName_isFuzzy', id:'searchByName_isFuzzy', isChecked:true}" #c_SearchByName_isFuzzy/>
+
+            <label for="searchByClassCode" class="text_left text_center">Class Code</label>
+            <app-textBox [props]="{icon:'search', placeholder:'Class Code', id:'searchByClassCode', name:'searchByClassCode'}" #c_SearchByClassCode/>
+            <app-toggle [props]="{name: 'searchByClassCode_isFuzzy', id:'searchByClassCode_isFuzzy', isChecked:true}" #c_SearchByClassCode_isFuzzy/>
+
+            <label for="searchByClassName" class="text_left text_center">Class Name</label>
+            <app-textBox [props]="{icon:'search', placeholder:'Class Name', id:'searchByClassName', name:'searchByClassName'}" #c_SearchByClassName/>
+            <app-toggle [props]="{name: 'searchByClassName_isFuzzy', id:'searchByClassName_isFuzzy', isChecked:true}" #c_SearchByClassName_isFuzzy/>
+            
+            <label for="onlyActiveSubject" class="text_left text_center" class="span2Right">Only Active Subject</label>
+            <app-toggle [props]="{name: 'onlyActiveSubject', id:'onlyActiveSubject', isChecked:true}" #c_OnlyActiveSubject/>
+            
+            <label for="onlyActiveClass" class="text_left text_center" class="span2Right">Only Active Class</label>
+            <app-toggle [props]="{name: 'onlyActiveClass', id:'onlyActiveClass', isChecked:true}" #c_OnlyActiveClass/>
+            
+            <p>Sort:</p>
+            <hr class="width100 marginTop marginBottom span2Right">
+            
+            <label for="sortByClassCode" class="text_left text_center">Class Code</label>
+            <app-dropdown [props]="{id: 'sortByClassCode', name:'sortByClassCode', allowNone: true, options: [{value:'1', text:'Ascending', isDefault:true}, {value:'2', text:'Descending'}]}" class="span2Right" #c_SortByClassCode></app-dropdown>
+            
+            <label for="sortByCode" class="text_left text_center">Code</label>
+            <app-dropdown [props]="{id: 'sortByCode', name:'sortByCode', allowNone: true, options: [{value:'ASC', text:'Ascending', isDefault:true}, {value:'DESC', text:'Descending'}]}" class="span2Right" #c_SortByCode></app-dropdown>
+            
+            <label for="sortByClassName" class="text_left text_center">Class Name</label>
+            <app-dropdown [props]="{id: 'sortByClassName', name:'sortByClassName', allowNone: true, options: [{value:'ASC', text:'Ascending'}, {value:'DESC', text:'Descending'}]}" class="span2Right" #c_SortByClassName></app-dropdown>
+            
+            <label for="sortByName" class="text_left text_center">Name</label>
+            <app-dropdown [props]="{id: 'sortByName', name:'sortByName', allowNone: true, options: [{value:'ASC', text:'Ascending'}, {value:'DESC', text:'Descending'}]}" class="span2Right"  #c_SortByName></app-dropdown>
+            
+            <label for="sortByClassStatus" class="text_left text_center">Class Status</label>
+            <app-dropdown [props]="{id: 'sortByClassStatus', name:'sortByClassStatus', allowNone: true, options: [{value:'ASC', text:'Ascending'}, {value:'DESC', text:'Descending'}]}" class="span2Right" #c_SortByClassStatus></app-dropdown>
+            
+            <label for="sortByStatus" class="text_left text_center">Status</label>
+            <app-dropdown [props]="{id: 'sortByStatus', name:'sortByStatus', allowNone: true, options: [{value:'ASC', text:'Ascending'}, {value:'DESC', text:'Descending'}]}" class="span2Right" #c_SortByStatus></app-dropdown>
+            
+            <p>Page:</p>
+            <hr class="width100 marginTop marginBottom span2Right">
+            
+            <label for="rowsPerPage" class="text_left text_center">Rows Per Page</label>
+            <app-textBox [props]="{type: 'number', name: 'rowsPerPage', id: 'rowsPerPage', value: '20'}" class="span2Right" #c_RowsPerPage/>
+            
+            <hr class="width100 marginTop marginBottom span3Right">
+            <app-icon-button [props]="{icon: 'filter_list', text:'Filter', type:'capsule'}" class="span3Right" (click)="filter()"/>
+  
+          </form>
+        </div>
+        <div class="card padding borderRadius span3Right">
+          <div *ngIf="loading_list; else listLoaded">
+            Loading classroom data...
+          </div>
+          <ng-template #listLoaded>
+            <div class="flex horizontal justify_space">
+              <p class="width100">Subjets: </p>
+              <app-icon-button [props]="{'icon': 'add', 'text': 'Add', 'type': 'capsule'}" (click)="navigateTo('add', '')"/>
+            </div>
+            <hr class="width100 marginBottom marginTop">
+            <table class="width100 borderLightGray borderSolid borderHalf borderRadius padding">
+              <tr>
+                <th class="paddingHalf marginVerticalHalf text_middle text_center">S.N.</th>
+                <th class="paddingHalf marginVerticalHalf text_middle text_center">Class Code</th>
+                <th class="paddingHalf marginVerticalHalf text_middle text_left">Class Name</th>
+                <th class="paddingHalf marginVerticalHalf text_middle text_center">Code</th>
+                <th class="paddingHalf marginVerticalHalf text_middle text_left">Name</th>
+                <th class="paddingHalf marginVerticalHalf text_middle text_center">Status</th>
+                <th class="paddingHalf marginVerticalHalf text_middle text_center">Controlls</th>
+              </tr>
+              <tr *ngFor="let subject of subjects" class="cardOnHover borderRadius">
+                <td class="paddingHalf marginVerticalHalf text_middle text_center">{{ subject.sn }}</td>
+                <td class="paddingHalf marginVerticalHalf text_middle text_center">{{ subject.class_Code }}</td>
+                <td class="paddingHalf marginVerticalHalf text_middle text_left">{{ subject.class_Name }}</td>
+                <td class="paddingHalf marginVerticalHalf text_middle text_center">{{ subject.code }}</td>
+                <td class="paddingHalf marginVerticalHalf text_middle text_left">{{ subject.name }}</td>
+                <td class="paddingHalf marginVerticalHalf text_middle text_center">{{ subject.isActive ? "Active" : "Inactive" }}</td>
+                <td class="paddingHalf marginVerticalHalf flex horizontal gapHalf center"><app-icon-button [props]="{'icon': 'visibility', 'text': '', 'type': 'capsule'}" (click)="navigateTo('view', subject.code)"/><app-icon-button [props]="{'icon': 'edit', 'text': '', 'type': 'capsule'}" (click)="navigateTo('edit', subject.code)"/></td>
+                
+              </tr>
+            </table>
+          </ng-template>
+        </div>
+        <div class="card flex center padding borderRadius">
+          <div *ngIf="loading_list; else listLoaded_pages">
+            Loading subject data...
+          </div>
+          <ng-template #listLoaded_pages>
+            <app-pages [props]="{page_Number: pages.page_Number, max_Page: pages.max_Page, rows_Count: pages.rows_Count, rows_Per_Page: pages.rows_Per_Page, total_Rows: pages.total_Rows}" (pageChange)="onPageChange($event)" #c_Page></app-pages>
+            <p>showing {{pages.rows_Count}} results out of {{pages.total_Rows}}</p>
+          </ng-template>
+        </div>
+      </div>
+      </ng-template>
+  </main>

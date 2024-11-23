@@ -21,7 +21,7 @@ import Swal from 'sweetalert2';
 })
 
 export class addClassroomComponent {
-    @ViewChild('form_AddClassroom') form_AddClassroom!: NgForm;
+  @ViewChild('form_AddClassroom') form_AddClassroom!: NgForm;
   @ViewChild('c_code') c_code!: TextBoxComponent;
   @ViewChild('c_name') c_name!: TextBoxComponent;
   @ViewChild('c_isActive') c_isActive!: ToggleComponent;

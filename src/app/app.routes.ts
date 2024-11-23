@@ -18,13 +18,15 @@ import { ListQuestionomponent } from './Component/Page/Questions/Querstion_List/
 
 export const routes: Routes = [
     { path: 'classroom/add', component: addClassroomComponent },
+    { path: 'classroom/add/', component: addClassroomComponent },
     { path: 'classroom/edit/:code', component: editClassroomComponent },
     { path: 'classroom/view/:code', component: ViewClassroomComponent },
     { path: 'classroom', component: listClassroomComponent },
     
     { path: 'subjects/add', component: addSubjectComponent },
-    { path: 'subjects/edit', component: EditSubjectComponent },
-    { path: 'subjects/view', component: ViewSubjectComponent },
+    { path: 'subjects/add/', component: addSubjectComponent },
+    { path: 'subjects/edit/:code', component: EditSubjectComponent },
+    { path: 'subjects/view/:code', component: ViewSubjectComponent },
     { path: 'subjects', component: ListSubjectComponent },
 
     { path: 'chapters/add', component: AddChapterComponent },
