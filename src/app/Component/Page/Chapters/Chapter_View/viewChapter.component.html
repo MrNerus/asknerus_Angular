@@ -1,38 +1,46 @@
 <main class="padding">
-    <form action="/api/add" method="post" #form_AddClassroom="ngForm" class="flex vertical align_center gap borderRadius paddingHalf" id="addClassroomForm">
-      <p class="width100">View Subject</p>
-      <hr class="width100">
-      <div class="grid gridCol3 width100">
-        <label for="Class" class="self_align_center ">Class:</label>
-        <app-dropdown class="width100 span2Right cursor_readonly" [props]="{}"/>
+  <form action="/api/add" method="post" #form_AddSubject="ngForm" class="flex vertical align_center gap borderRadius paddingHalf" id="addSubjectForm">
+    <p class="width100">Add Subject</p>
+    <hr class="width100">
+    <div class="grid gridCol3 width100">
+      <label for="parentClass" class="self_align_center">Parent Class:</label>
+      <div *ngIf="loadingSubject; else subjectLoaded">
+        Loading classroom...
       </div>
-      <div class="grid gridCol3 width100">
-        <label for="SubjectCode" class="self_align_center">Subject Code:</label>
-        <app-textBox [props]="{
-            regex: '[A-Za-z0-9]+', placeholder: 'Enter Subject Code', type: 'text', icon: 'add', tooltip: 'A-Z, a-z, 0-9', name: 'SubjectCode',
-            id: 'SubjectCode', isRequired: true
-        }" class="width100 span2Right cursor_readonly" />
+      <ng-template #subjectLoaded>
+        <app-dropdown #c_ParentClass [props]="{
+            name: 'parentClass', id: 'paerntClass', allowNone: false, options: dropDownOption, isReadonly: true
+        }" class="width100 span2Right" />
+      </ng-template>
+    </div>
+    <div class="grid gridCol3 width100">
+      <label for="subjectCode" class="self_align_center">Subject Code:</label>
+      <app-textBox #c_code [props]="{
+          regex: '[^\s][A-z0-9_\s]+', placeholder: 'Enter Subject Code', type: 'text', icon: 'add', tooltip: 'A-Z, a-z, 0-9, _, -', name: 'subjectCode',
+          id: 'subjectCode', isRequired: true, isReadonly: true
+      }" class="width100 span2Right" />
+    </div>
+    
+    <div class="grid gridCol3 width100">
+      <label for="subjectName" class="self_align_center">Subject Name:</label>
+      <app-textBox #c_name [props]="{
+          regex: '[a-zA-Z0-9_ ]*', placeholder: 'Enter Subject Name', type: 'text', icon: 'add', tooltip: 'A-Z, a-z, 0-9', name: 'subjectName',
+        id: 'subjectName', isRequired: true, isReadonly: true
+      }" class="width100 span2Right" />
+    </div>
+    <div class="grid gridCol3 width100">
+      <label for="IsActive" class="self_align_center">Is Active:</label>
+      <div class="width100 span2Right">
+        <app-toggle #c_isActive [props]="{id: 'classroomToggle', name: 'classroomToggle', isChecked: true, isReadOnly: true}" />
       </div>
-      
-      <div class="grid gridCol3 width100">
-        <label for="SubjectName" class="self_align_center">Subject Name:</label>
-        <app-textBox [props]="{
-            regex: '[A-Za-z0-9]+', placeholder: 'Enter Subject Name', type: 'text', icon: 'add', tooltip: 'A-Z, a-z, 0-9', name: 'SubjectName',
-          id: 'SubjectName', isRequired: true
-        }" class="width100 span2Right cursor_readonly" />
-      </div>
+    </div>
 
-      <div class="grid gridCol3 width100">
-        <label for="IsActive" class="self_align_center">Is Active:</label>
-        <div class="width100 span2Right cursor_readonly">
-          <app-toggle [props]="{id: 'IsActive', name: 'IsActive', isChecked: true}" />
-        </div>
-      </div>
+    
+    <div class="grid gridCol2 gap width100">
+      <app-icon-button [props]="{'icon': 'keyboard_backspace', 'text': 'Back', 'type': 'capsule'}" (click)="navigateTo('', '')"/>
+      <app-icon-button [props]="{'icon': 'edit', 'text': 'Edit', 'type': 'capsule'}" (click)="navigateTo('edit', subjectCode)"/>
+    
+    </div>
 
-      <div class="grid gridCol2 gap width100">
-        <app-icon-button [props]="{'icon': 'keyboard_backspace', 'text': 'Back', 'type': 'capsule'}" onClick="window.location = '/classroom/list'"/>
-        <app-icon-button [props]="{'icon': 'edit', 'text': 'Edit', 'type': 'capsule'}" onclick = "submit()"/>
-      </div>
-
-    </form>
+  </form>
 </main>

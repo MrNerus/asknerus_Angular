@@ -30,8 +30,9 @@ export const routes: Routes = [
     { path: 'subjects', component: ListSubjectComponent },
 
     { path: 'chapters/add', component: AddChapterComponent },
-    { path: 'chapters/edit', component: EditChapterComponent },
-    { path: 'chapters/view', component: ViewChapterComponent },
+    { path: 'chapters/add/', component: AddChapterComponent },
+    { path: 'chapters/edit/:code', component: EditChapterComponent },
+    { path: 'chapters/view/:view', component: ViewChapterComponent },
     { path: 'chapters', component: ListChapteromponent },
 
     { path: 'questions/add', component: AddQuestionComponent },
