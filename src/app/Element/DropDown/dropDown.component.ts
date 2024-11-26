@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { CommonModule, NgComponentOutlet, NgFor } from '@angular/common';
 import { Classes } from '../../APIHandeler/Class.api';
 import { SubjectList } from '../../APIHandeler/Subject.api';
@@ -18,6 +18,8 @@ export class DropdownComponent {
   @Input({ required: true }) props: Partial<IDropDown> = {}
   @ViewChild('d_select') d_select!: ElementRef<HTMLSelectElement> ;
   @ViewChild('h_input') h_input!: ElementRef<HTMLInputElement> ;
+  @Output() selectChange = new EventEmitter<string>();
+
 
   _props: IDropDown;
 
@@ -36,7 +38,11 @@ export class DropdownComponent {
     return this.d_select.nativeElement.value
   }
 
+  select_Event() {
+    this.selectChange.emit(this.value);
+  } 
 }
+
 
 
 export interface IDropDown {

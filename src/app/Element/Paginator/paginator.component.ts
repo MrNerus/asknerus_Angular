@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './paginator.component.html',
   styleUrl: './paginator.component.css',
   inputs: ['props'],
-  imports: [SanitizeHtmlPipe, IconButtonComponent, CommonModule],
+  imports: [IconButtonComponent, CommonModule],
   encapsulation: ViewEncapsulation.None
 })
 export class PaginatorComponent {
@@ -59,7 +59,6 @@ export class PaginatorComponent {
         for (let i = startPage; i <= endPage; i++) {
             pages.push(i);
         }
-    
         return pages;
     }
 

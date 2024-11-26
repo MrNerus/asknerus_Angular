@@ -28,5 +28,5 @@ export interface IToggle {
     name?: string;
     id?: string;
     isChecked?: boolean;
-    isReadOnly?: boolean;
+    isReadonly?: boolean;
 }

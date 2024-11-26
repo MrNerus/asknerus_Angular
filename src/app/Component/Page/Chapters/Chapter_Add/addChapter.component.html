@@ -1,43 +1,62 @@
 <main class="padding">
-    <form action="/api/add" method="post" #form_AddClassroom="ngForm" class="flex vertical align_center gap borderRadius paddingHalf" id="addClassroomForm">
-      <p class="width100">Add Chapter</p>
-      <hr class="width100">
-      <div class="grid gridCol3 width100">
-        <label for="Class" class="self_align_center ">Class:</label>
-        <app-dropdown class="width100 span2Right" [props]="{}"/>
-      </div>
-      <div class="grid gridCol3 width100">
-        <label for="Class" class="self_align_center ">Subject:</label>
-        <app-dropdown class="width100 span2Right" [props]="{}"/>
-      </div>
-      <div class="grid gridCol3 width100">
-        <label for="ChapterCode" class="self_align_center">Chapter Code:</label>
-        <app-textBox [props]="{
-            regex: '[A-Za-z0-9]+', placeholder: 'Enter Chapter Code', type: 'text', icon: 'add', tooltip: 'A-Z, a-z, 0-9', name: 'SubjectCode',
-            id: 'ChapterCode', isRequired: true
-        }" class="width100 span2Right" />
-      </div>
-      
-      <div class="grid gridCol3 width100">
-        <label for="ChapterName" class="self_align_center">Chapter Name:</label>
-        <app-textBox [props]="{
-            regex: '[A-Za-z0-9]+', placeholder: 'Enter Chapter Name', type: 'text', icon: 'add', tooltip: 'A-Z, a-z, 0-9', name: 'SubjectName',
-          id: 'ChapterName', isRequired: true
-        }" class="width100 span2Right" />
-      </div>
-      <div class="grid gridCol3 width100">
-        <label for="IsActive" class="self_align_center">Is Active:</label>
-        <div class="width100 span2Right">
-          <app-toggle [props]="{id: 'IsActive', name: 'IsActive', isChecked: true}" />
-        </div>
-      </div>
+    <form action="/api/add" method="post" #form_AddChapter="ngForm"
+        class="flex vertical align_center gap borderRadius paddingHalf" id="addChapterForm">
+        <p class="width100">Add Chapter</p>
+        <hr class="width100">
 
-      
-      <div class="grid gridCol3 gap width100">
-        <app-icon-button [props]="{'icon': 'clear_all', 'text': 'Clear All', 'type': 'capsule'}" onClick="document.getElementById('addClassroomForm').reset();" />
-        <app-icon-button [props]="{'icon': 'keyboard_backspace', 'text': 'Back', 'type': 'capsule'}" onClick="window.location = '/classroom/list'"/>
-        <app-icon-button [props]="{'icon': 'Add', 'text': 'Add', 'type': 'capsule'}" onclick = "submit()"/>
-      </div>
+        <div class="grid gridCol3 width100">
+            <label for="parentClass" class="self_align_center">Parent Class:</label>
+            <div *ngIf="loadingClassrooms; else classRoomLoaded">
+                Loading classroom...
+            </div>
+            <ng-template #classRoomLoaded>
+                <app-dropdown #c_ParentClass [props]="{
+                    name: 'parentClass', id: 'paerntClass', allowNone: false, options: dropDownOption_Class
+                }" class="width100 span2Right" (selectChange)="onSelectChange($event)" />
+            </ng-template>
+        </div>
+
+        <div class="grid gridCol3 width100">
+            <label for="parentClass" class="self_align_center">Parent Subject:</label>
+            <div *ngIf="loadingSubjects; else subjectsLoaded">
+                Loading subjects...
+            </div>
+            <ng-template #subjectsLoaded>
+                <app-dropdown #c_ParentSubject [props]="{
+                    name: 'parentSubject', id: 'paerntSubject', allowNone: false, options: dropDownOption_Subject
+                }" class="width100 span2Right" />
+            </ng-template>
+        </div>
+
+        <div class="grid gridCol3 width100">
+            <label for="chapterCode" class="self_align_center">Chapter Code:</label>
+            <app-textBox #c_code [props]="{
+                regex: '[^\s][A-z0-9_\s]+', placeholder: 'Enter Chapter Code', type: 'text', icon: 'add', tooltip: 'A-Z, a-z, 0-9, _ (This can\'t be changed lateron.)', name: 'chapterCode',
+                id: 'chapterCode', isRequired: true
+            }" class="width100 span2Right" />
+        </div>
+
+        <div class="grid gridCol3 width100">
+            <label for="chapterName" class="self_align_center">Chapter Name:</label>
+            <app-textBox #c_name [props]="{
+                regex: '[a-zA-Z0-9_ ]*', placeholder: 'Enter Subject Name', type: 'text', icon: 'add', tooltip: 'A-Z, a-z, 0-9, _', name: 'chapterName',
+                id: 'chapterName', isRequired: true
+            }" class="width100 span2Right" />
+        </div>
+
+        <div class="grid gridCol3 width100">
+            <label for="IsActive" class="self_align_center">Is Active:</label>
+            <div class="width100 span2Right">
+                <app-toggle #c_isActive [props]="{id: 'chapterToggle', name: 'chapterToggle', isChecked: true}" />
+            </div>
+        </div>
+
+
+        <div class="grid gridCol3 gap width100">
+            <app-icon-button [props]="{'icon': 'clear_all', 'text': 'Clear All', 'type': 'capsule'}" onClick="document.getElementById('addChapterForm').reset();" />
+            <app-icon-button [props]="{'icon': 'keyboard_backspace', 'text': 'Back', 'type': 'capsule'}" (click)="navigateTo('', '')" />
+            <app-icon-button [props]="{'icon': 'Add', 'text': 'Add', 'type': 'capsule'}" (click)="submit()" class="check_valid" />
+        </div>
 
     </form>
 </main>

@@ -7,7 +7,7 @@ import { CdkMenuStandaloneMenuExample } from "./Element/MenuButton/menuButton.co
 import { SidenavComponent } from "./Component/Sidenav/sidenav.component";
 import { TextBoxComponent } from "./Element/TextBox/textBox.component";
 import { ResearchLabComponent } from "./Component/Page/researchLab/researchLab.component";
-import { addClassroomComponent } from "./Component/Page/classroom/addClassroom/addClassroom.component";
+import { AddClassroomComponent } from "./Component/Page/classroom/addClassroom/addClassroom.component";
 
 
 @Component({
@@ -24,7 +24,7 @@ import { addClassroomComponent } from "./Component/Page/classroom/addClassroom/a
       SidenavComponent,
       TextBoxComponent,
       ResearchLabComponent,
-      addClassroomComponent
+      AddClassroomComponent
   ]
 })
 export class AppComponent {

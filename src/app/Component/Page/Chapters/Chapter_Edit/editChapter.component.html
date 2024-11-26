@@ -1,39 +1,65 @@
 <main class="padding">
-    <form action="/api/add" method="post" #form_AddClassroom="ngForm" class="flex vertical align_center gap borderRadius paddingHalf" id="addClassroomForm">
-      <p class="width100">Edit Subject</p>
+  <form action="/api/add" method="post" #form_EditChapter="ngForm"
+      class="flex vertical align_center gap borderRadius paddingHalf" id="addChapterForm">
+      <p class="width100">Edit Chapter</p>
       <hr class="width100">
+      <div *ngIf="loading; else Loaded">
+        Loading chapters...
+        </div>
+    <ng-template #Loaded>
       <div class="grid gridCol3 width100">
-        <label for="Class" class="self_align_center ">Class:</label>
-        <app-dropdown class="width100 span2Right cursor_readonly" [props]="{}"/>
-      </div>
-      <div class="grid gridCol3 width100">
-        <label for="SubjectCode" class="self_align_center">Subject Code:</label>
-        <app-textBox [props]="{
-            regex: '[A-Za-z0-9]+', placeholder: 'Enter Subject Code', type: 'text', icon: 'add', tooltip: 'A-Z, a-z, 0-9', name: 'SubjectCode',
-            id: 'SubjectCode', isRequired: true
-        }" class="width100 span2Right cursor_readonly" />
-      </div>
-      
-      <div class="grid gridCol3 width100">
-        <label for="SubjectName" class="self_align_center">Subject Name:</label>
-        <app-textBox [props]="{
-            regex: '[A-Za-z0-9]+', placeholder: 'Enter Subject Name', type: 'text', icon: 'add', tooltip: 'A-Z, a-z, 0-9', name: 'SubjectName',
-          id: 'SubjectName', isRequired: true
-        }" class="width100 span2Right" />
+          <label for="parentClass" class="self_align_center">Parent Class:</label>
+          <div *ngIf="loadingClassrooms; else classRoomLoaded">
+              Loading classroom...
+          </div>
+          <ng-template #classRoomLoaded>
+              <app-dropdown #c_ParentClass [props]="{
+                  name: 'parentClass', id: 'paerntClass', allowNone: false, options: dropDownOption_Class, isReadonly: true
+              }" class="width100 span2Right isReadonly" />
+          </ng-template>
       </div>
 
       <div class="grid gridCol3 width100">
-        <label for="IsActive" class="self_align_center">Is Active:</label>
-        <div class="width100 span2Right">
-          <app-toggle [props]="{id: 'IsActive', name: 'IsActive', isChecked: true}" />
-        </div>
+          <label for="parentClass" class="self_align_center">Parent Subject:</label>
+          <div *ngIf="loadingSubjects; else subjectsLoaded">
+              Loading subjects...
+          </div>
+          <ng-template #subjectsLoaded>
+              <app-dropdown #c_ParentSubject [props]="{
+                  name: 'parentSubject', id: 'paerntSubject', allowNone: false, options: dropDownOption_Subject, isReadonly: true
+              }" class="width100 span2Right isReadonly" />
+          </ng-template>
       </div>
+
+      <div class="grid gridCol3 width100">
+          <label for="chapterCode" class="self_align_center">Chapter Code:</label>
+          <app-textBox #c_code [props]="{
+              regex: '[^\s][A-z0-9_\s]+', placeholder: 'Enter Chapter Code', type: 'text', icon: 'add', tooltip: 'A-Z, a-z, 0-9, _ (This can\'t be changed lateron.)', name: 'chapterCode',
+              id: 'chapterCode', isRequired: true, isReadonly: true, value: Code
+          }" class="width100 span2Right isReadonly" />
+      </div>
+
+      <div class="grid gridCol3 width100">
+          <label for="chapterName" class="self_align_center">Chapter Name:</label>
+          <app-textBox #c_name [props]="{
+              regex: '[a-zA-Z0-9_ ]*', placeholder: 'Enter Subject Name', type: 'text', icon: 'add', tooltip: 'A-Z, a-z, 0-9, _', name: 'chapterName',
+              id: 'chapterName', isRequired: true, value: Name
+          }" class="width100 span2Right" />
+      </div>
+
+      <div class="grid gridCol3 width100">
+          <label for="IsActive" class="self_align_center">Is Active:</label>
+          <div class="width100 span2Right">
+              <app-toggle #c_isActive [props]="{id: 'chapterToggle', name: 'chapterToggle', isChecked: isActive}" />
+          </div>
+      </div>
+
 
       <div class="grid gridCol3 gap width100">
-        <app-icon-button [props]="{'icon': 'clear_all', 'text': 'Reset', 'type': 'capsule'}" onClick="document.getElementById('addClassroomForm').reset();" />
-        <app-icon-button [props]="{'icon': 'keyboard_backspace', 'text': 'Back', 'type': 'capsule'}" onClick="window.location = '/classroom/list'"/>
-        <app-icon-button [props]="{'icon': 'Save', 'text': 'Save', 'type': 'capsule'}" onclick = "submit()"/>
+          <app-icon-button [props]="{'icon': 'clear_all', 'text': 'Clear All', 'type': 'capsule'}" onClick="document.getElementById('addChapterForm').reset();" />
+          <app-icon-button [props]="{'icon': 'keyboard_backspace', 'text': 'Back', 'type': 'capsule'}" (click)="navigateTo('', '')" />
+          <app-icon-button [props]="{'icon': 'Save', 'text': 'Save', 'type': 'capsule'}" (click)="submit()" class="check_valid" />
       </div>
-
-    </form>
+      </ng-template>   
+  </form>
 </main>
