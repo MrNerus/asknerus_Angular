@@ -33,11 +33,22 @@
             <app-textBox [props]="{icon:'search', placeholder:'Class Name', id:'searchByClassName', name:'searchByClassName'}" #c_SearchByClassName/>
             <app-toggle [props]="{name: 'searchByClassName_isFuzzy', id:'searchByClassName_isFuzzy', isChecked:true}" #c_SearchByClassName_isFuzzy/>
             
-            <label for="onlyActiveSubject" class="text_left text_center" class="span2Right">Only Active Subject</label>
-            <app-toggle [props]="{name: 'onlyActiveSubject', id:'onlyActiveSubject', isChecked:true}" #c_OnlyActiveSubject/>
+            <label for="searchBySubjectCode" class="text_left text_center">Subject Code</label>
+            <app-textBox [props]="{icon:'search', placeholder:'Subject Code', id:'searchBySubjectCode', name:'searchBySubjectCode'}" #c_SearchBySubjectCode/>
+            <app-toggle [props]="{name: 'searchBySubjectCode_isFuzzy', id:'searchBySubjectCode_isFuzzy', isChecked:true}" #c_SearchBySubjectCode_isFuzzy/>
+
+            <label for="searchBySubjectName" class="text_left text_center">Subject Name</label>
+            <app-textBox [props]="{icon:'search', placeholder:'Subject Name', id:'searchByClassName', name:'searchBySubjectName'}" #c_SearchBySubjectName/>
+            <app-toggle [props]="{name: 'searchBySubjectName_isFuzzy', id:'searchBySubjectName_isFuzzy', isChecked:true}" #c_SearchBySubjectName_isFuzzy/>
             
             <label for="onlyActiveClass" class="text_left text_center" class="span2Right">Only Active Class</label>
             <app-toggle [props]="{name: 'onlyActiveClass', id:'onlyActiveClass', isChecked:true}" #c_OnlyActiveClass/>
+            
+            <label for="onlyActiveSubject" class="text_left text_center" class="span2Right">Only Active Subject</label>
+            <app-toggle [props]="{name: 'onlyActiveSubject', id:'onlyActiveSubject', isChecked:true}" #c_OnlyActiveSubject/>
+
+            <label for="onlyActiveChapter" class="text_left text_center" class="span2Right">Only Active Chapter</label>
+            <app-toggle [props]="{name: 'onlyActiveChapter', id:'onlyActiveChapter', isChecked:true}" #c_OnlyActiveChapter/>
             
             <p>Sort:</p>
             <hr class="width100 marginTop marginBottom span2Right">
@@ -45,17 +56,26 @@
             <label for="sortByClassCode" class="text_left text_center">Class Code</label>
             <app-dropdown [props]="{id: 'sortByClassCode', name:'sortByClassCode', allowNone: true, options: [{value:'1', text:'Ascending', isDefault:true}, {value:'2', text:'Descending'}]}" class="span2Right" #c_SortByClassCode></app-dropdown>
             
+            <label for="sortBySubjectCode" class="text_left text_center">Subject Code</label>
+            <app-dropdown [props]="{id: 'sortBySubjectCode', name:'sortBySubjectCode', allowNone: true, options: [{value:'1', text:'Ascending', isDefault:true}, {value:'2', text:'Descending'}]}" class="span2Right" #c_SortBySubjectCode></app-dropdown>
+            
             <label for="sortByCode" class="text_left text_center">Code</label>
             <app-dropdown [props]="{id: 'sortByCode', name:'sortByCode', allowNone: true, options: [{value:'ASC', text:'Ascending', isDefault:true}, {value:'DESC', text:'Descending'}]}" class="span2Right" #c_SortByCode></app-dropdown>
             
             <label for="sortByClassName" class="text_left text_center">Class Name</label>
             <app-dropdown [props]="{id: 'sortByClassName', name:'sortByClassName', allowNone: true, options: [{value:'ASC', text:'Ascending'}, {value:'DESC', text:'Descending'}]}" class="span2Right" #c_SortByClassName></app-dropdown>
             
+            <label for="sortBySubjectName" class="text_left text_center">Subject Name</label>
+            <app-dropdown [props]="{id: 'sortBySubjectName', name:'sortBySubjectName', allowNone: true, options: [{value:'ASC', text:'Ascending'}, {value:'DESC', text:'Descending'}]}" class="span2Right" #c_SortBySubjectName></app-dropdown>
+            
             <label for="sortByName" class="text_left text_center">Name</label>
             <app-dropdown [props]="{id: 'sortByName', name:'sortByName', allowNone: true, options: [{value:'ASC', text:'Ascending'}, {value:'DESC', text:'Descending'}]}" class="span2Right"  #c_SortByName></app-dropdown>
             
             <label for="sortByClassStatus" class="text_left text_center">Class Status</label>
             <app-dropdown [props]="{id: 'sortByClassStatus', name:'sortByClassStatus', allowNone: true, options: [{value:'ASC', text:'Ascending'}, {value:'DESC', text:'Descending'}]}" class="span2Right" #c_SortByClassStatus></app-dropdown>
+            
+            <label for="sortBySubjectStatus" class="text_left text_center">Subject Status</label>
+            <app-dropdown [props]="{id: 'sortBySubjectStatus', name:'sortBySubjectStatus', allowNone: true, options: [{value:'ASC', text:'Ascending'}, {value:'DESC', text:'Descending'}]}" class="span2Right" #c_SortBySubjectStatus></app-dropdown>
             
             <label for="sortByStatus" class="text_left text_center">Status</label>
             <app-dropdown [props]="{id: 'sortByStatus', name:'sortByStatus', allowNone: true, options: [{value:'ASC', text:'Ascending'}, {value:'DESC', text:'Descending'}]}" class="span2Right" #c_SortByStatus></app-dropdown>
@@ -71,34 +91,38 @@
   
           </form>
         </div>
-        <div class="card padding borderRadius span3Right">
+        <div class="card padding borderRadius span3Right scrollOnX">
           <div *ngIf="loading_list; else listLoaded">
-            Loading classroom data...
+            Loading Chapter data...
           </div>
           <ng-template #listLoaded>
             <div class="flex horizontal justify_space">
-              <p class="width100">Subjets: </p>
+              <p class="width100">Chapters: </p>
               <app-icon-button [props]="{'icon': 'add', 'text': 'Add', 'type': 'capsule'}" (click)="navigateTo('add', '')"/>
             </div>
             <hr class="width100 marginBottom marginTop">
-            <table class="width100 borderLightGray borderSolid borderHalf borderRadius padding">
+            <table class="width100 borderLightGray borderSolid borderHalf borderRadius padding maxContent">
               <tr>
                 <th class="paddingHalf marginVerticalHalf text_middle text_center">S.N.</th>
                 <th class="paddingHalf marginVerticalHalf text_middle text_center">Class Code</th>
                 <th class="paddingHalf marginVerticalHalf text_middle text_left">Class Name</th>
+                <th class="paddingHalf marginVerticalHalf text_middle text_center">Subject Code</th>
+                <th class="paddingHalf marginVerticalHalf text_middle text_left">Subject Name</th>
                 <th class="paddingHalf marginVerticalHalf text_middle text_center">Code</th>
                 <th class="paddingHalf marginVerticalHalf text_middle text_left">Name</th>
                 <th class="paddingHalf marginVerticalHalf text_middle text_center">Status</th>
                 <th class="paddingHalf marginVerticalHalf text_middle text_center">Controlls</th>
               </tr>
-              <tr *ngFor="let subject of subjects" class="cardOnHover borderRadius">
-                <td class="paddingHalf marginVerticalHalf text_middle text_center">{{ subject.sn }}</td>
-                <td class="paddingHalf marginVerticalHalf text_middle text_center">{{ subject.class_Code }}</td>
-                <td class="paddingHalf marginVerticalHalf text_middle text_left">{{ subject.class_Name }}</td>
-                <td class="paddingHalf marginVerticalHalf text_middle text_center">{{ subject.code }}</td>
-                <td class="paddingHalf marginVerticalHalf text_middle text_left">{{ subject.name }}</td>
-                <td class="paddingHalf marginVerticalHalf text_middle text_center">{{ subject.isActive ? "Active" : "Inactive" }}</td>
-                <td class="paddingHalf marginVerticalHalf flex horizontal gapHalf center"><app-icon-button [props]="{'icon': 'visibility', 'text': '', 'type': 'capsule'}" (click)="navigateTo('view', subject.code)"/><app-icon-button [props]="{'icon': 'edit', 'text': '', 'type': 'capsule'}" (click)="navigateTo('edit', subject.code)"/></td>
+              <tr *ngFor="let chapter of chapters" class="cardOnHover borderRadius">
+                <td class="paddingHalf marginVerticalHalf text_middle text_center">{{ chapter.sn }}</td>
+                <td class="paddingHalf marginVerticalHalf text_middle text_center">{{ chapter.class_Code }}</td>
+                <td class="paddingHalf marginVerticalHalf text_middle text_left">{{ chapter.class_Name }}</td>
+                <td class="paddingHalf marginVerticalHalf text_middle text_center">{{ chapter.subject_Code }}</td>
+                <td class="paddingHalf marginVerticalHalf text_middle text_left">{{ chapter.subject_Name }}</td>
+                <td class="paddingHalf marginVerticalHalf text_middle text_center">{{ chapter.code }}</td>
+                <td class="paddingHalf marginVerticalHalf text_middle text_left">{{ chapter.name }}</td>
+                <td class="paddingHalf marginVerticalHalf text_middle text_center">{{ chapter.isActive ? "Active" : "Inactive" }}</td>
+                <td class="paddingHalf marginVerticalHalf flex horizontal gapHalf center"><app-icon-button [props]="{'icon': 'visibility', 'text': '', 'type': 'capsule'}" (click)="navigateTo('view', chapter.code)"/><app-icon-button [props]="{'icon': 'edit', 'text': '', 'type': 'capsule'}" (click)="navigateTo('edit', chapter.code)"/></td>
                 
               </tr>
             </table>

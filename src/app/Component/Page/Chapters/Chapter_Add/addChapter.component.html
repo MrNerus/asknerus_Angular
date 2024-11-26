@@ -12,7 +12,7 @@
             <ng-template #classRoomLoaded>
                 <app-dropdown #c_ParentClass [props]="{
                     name: 'parentClass', id: 'paerntClass', allowNone: false, options: dropDownOption_Class
-                }" class="width100 span2Right" />
+                }" class="width100 span2Right" (selectChange)="onSelectChange($event)" />
             </ng-template>
         </div>
 

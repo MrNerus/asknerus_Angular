@@ -14,6 +14,7 @@ import { SubjectService } from '../../../../Services/subject.service';
 import { IKeyValue } from '../../../../Interfaces/IKeyValue';
 import { CommonModule } from '@angular/common';
 import { ChapterService } from '../../../../Services/chapter.service';
+import { IChapter } from '../../../../Interfaces/IChapter';
 
 @Component({
     selector: 'app-addChapter',
@@ -25,7 +26,7 @@ import { ChapterService } from '../../../../Services/chapter.service';
     // encapsulation: ViewEncapsulation.None
 })
 
-export class addChapterComponent {
+export class AddChapterComponent {
     @ViewChild('form_AddChapter') form_AddChapter!: NgForm;
     @ViewChild('c_ParentClass') c_ParentClass!: DropdownComponent;
     @ViewChild('c_ParentSubject') c_ParentSubject!: DropdownComponent;
@@ -109,6 +110,36 @@ export class addChapterComponent {
         });
     }
 
+    onClassChange(): void {
+        this.loadingSubjects = true;
+        this.subjectService.requestKeyValue(this.c_ParentClass.value).subscribe({
+            next: (response: IKeyValue[]) => {
+                for (let i = 0; i < response.length; i++) {
+                    this.dropDownOption_Subject.push({ text: response[i].value, value: response[i].key });
+                }
+
+                this.loadingSubjects = false;
+                
+            },
+            error: (error) => {
+                this.loadingSubjects = false;
+                this.dropDownOption_Subject = [{ text: "~ No Code Found", value: "~ No Name Found" }];
+
+                Swal.fire({
+                    title: 'Error!',
+                    text: error.error.content,
+                    icon: 'error',
+                })
+            },
+            complete: () => {
+                this.loading = false; // Set loading to false when done
+                this.loadingClassrooms = false;
+                this.loadingSubjects = false
+
+            }
+        });
+    }
+
     navigateTo(action: string, code: string): void {
         const route = `/chapters/${action}/${code}`;
         this.router.navigateByUrl(route);
@@ -117,21 +148,21 @@ export class addChapterComponent {
     submit(): void {
         if (this.form_AddChapter.valid) {
 
-            const subjectData: ISubject = {
+            const chapterData: IChapter = {
                 sn: -1,
-                class_Code: this.c_ParentClass.value,
+                subject_Code: this.c_ParentSubject.value,
                 code: this.c_code.value,
                 name: this.c_name.value,
                 isActive: this.c_isActive.value,
             };
 
-            console.log(subjectData)
+            console.log(chapterData)
 
-            this.subjectService.addSubject(subjectData).subscribe({
+            this.chapterService.addChapter(chapterData).subscribe({
                 next: (response) => {
                     Swal.fire({
                         title: 'Saved',
-                        text: `${this.subjectCode} was added successfully.`,
+                        text: `${chapterData.code} was added successfully.`,
                         icon: 'success',
                     });
                     this.navigateTo('', '')
@@ -152,5 +183,37 @@ export class addChapterComponent {
                 // confirmButtonText: 'Cool'
             })
         }
+    }
+
+    onSelectChange(value: string) {
+        this.loadingClassrooms = false;
+        this.loadingSubjects = true;
+        this.dropDownOption_Subject = [];
+        this.subjectService.requestKeyValue(value).subscribe({
+            next: (response: IKeyValue[]) => {
+                for (let i = 0; i < response.length; i++) {
+                    this.dropDownOption_Subject.push({ text: response[i].value, value: response[i].key });
+                }
+
+                this.loadingSubjects = false;
+                
+            },
+            error: (error) => {
+                this.loadingSubjects = false;
+                this.dropDownOption_Subject = [{ text: "~ No Code Found", value: "~ No Name Found" }];
+
+                Swal.fire({
+                    title: 'Error!',
+                    text: error.error.content,
+                    icon: 'error',
+                })
+            },
+            complete: () => {
+                this.loading = false; // Set loading to false when done
+                this.loadingClassrooms = false;
+                this.loadingSubjects = false
+
+            }
+        });
     }
 };

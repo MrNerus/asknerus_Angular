@@ -191,6 +191,10 @@ form:has( input:invalid ) .check_valid * { pointer-events: none }
 .width100 {width: 100%;}
 .height100 {min-height: 100%;}
 .heightAuto {height: auto;}
+.maxContent { width: max-content;} 
+.scrollOnX { overflow-x: auto;}
+.scrollOnX { overflow-y: auto;}
+
 
 .span1Right {grid-column: span 1;}
 .span2Right {grid-column: span 2;}

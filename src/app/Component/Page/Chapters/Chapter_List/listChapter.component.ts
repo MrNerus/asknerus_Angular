@@ -18,31 +18,40 @@ import { SubjectService } from '../../../../Services/subject.service';
 import { IPaginatedRequest } from '../../../../Interfaces/IPaginatedRequest';
 import { Enum_OrderMode } from '../../../../Enum/Enum_OrderMode';
 import { EnumMapper } from '../../../../Mapper/Enums';
+import { IChapter_Detail, IChapterDetails } from '../../../../Interfaces/IChapter';
+import { ChapterService } from '../../../../Services/chapter.service';
 
 @Component({
-    selector: 'app-listSubject',
-    styleUrl: './listSubject.component.css',
-    templateUrl: './listSubject.component.html',
+    selector: 'app-listChapter',
+    styleUrl: './listChapter.component.css',
+    templateUrl: './listChapter.component.html',
     standalone: true,
     // inputs: ['props'],
     imports: [TextBoxComponent, IconButtonComponent, DropdownComponent, ToggleComponent, FormsModule, CommonModule, PaginatorComponent],
     // encapsulation: ViewEncapsulation.None
 })
 
-export class ListSubjectComponent {
+export class ListChapterComponent {
     @ViewChild('c_SearchKeyword') c_SearchKeyword!: TextBoxComponent;
     
     @ViewChild('c_SearchByCode') c_SearchByCode!: TextBoxComponent;
     @ViewChild('c_SearchByName') c_SearchByName!: TextBoxComponent;
-    @ViewChild('c_SearchByClassCode') c_SearchByClassCode!: TextBoxComponent;
-    @ViewChild('c_SearchByClassName') c_SearchByClassName!: TextBoxComponent;
-    
     @ViewChild('c_SearchByCode_isFuzzy') c_SearchByCode_isFuzzy!: ToggleComponent;
     @ViewChild('c_SearchByName_isFuzzy') c_SearchByName_isFuzzy!: ToggleComponent;
+    @ViewChild('c_OnlyActiveChapter') c_OnlyActiveChapter!: ToggleComponent;
+
+    @ViewChild('c_SearchByClassCode') c_SearchByClassCode!: TextBoxComponent;
+    @ViewChild('c_SearchByClassName') c_SearchByClassName!: TextBoxComponent;
     @ViewChild('c_SearchByClassCode_isFuzzy') c_SearchByClassCode_isFuzzy!: ToggleComponent;
     @ViewChild('c_SearchByClassName_isFuzzy') c_SearchByClassName_isFuzzy!: ToggleComponent;
-    @ViewChild('c_OnlyActiveSubject') c_OnlyActiveSubject!: ToggleComponent;
     @ViewChild('c_OnlyActiveClass') c_OnlyActiveClass!: ToggleComponent;
+
+    @ViewChild('c_SearchBySubjectCode') c_SearchBySubjectCode!: TextBoxComponent;
+    @ViewChild('c_SearchBySubjectName') c_SearchBySubjectName!: TextBoxComponent;
+    @ViewChild('c_SearchBySubjectCode_isFuzzy') c_SearchBySubjectCode_isFuzzy!: ToggleComponent;
+    @ViewChild('c_SearchBySubjectName_isFuzzy') c_SearchBySubjectName_isFuzzy!: ToggleComponent;
+    @ViewChild('c_OnlyActiveSubject') c_OnlyActiveSubject!: ToggleComponent;
+    
 
     @ViewChild('c_SortByCode') c_SortByCode!: DropdownComponent;
     @ViewChild('c_SortByName') c_SortByName!: DropdownComponent;
@@ -50,6 +59,9 @@ export class ListSubjectComponent {
     @ViewChild('c_SortByClassCode') c_SortByClassCode!: DropdownComponent;
     @ViewChild('c_SortByClassName') c_SortByClassName!: DropdownComponent;
     @ViewChild('c_SortByClassStatus') c_SortByClassStatus!: DropdownComponent;
+    @ViewChild('c_SortBySubjectCode') c_SortBySubjectCode!: DropdownComponent;
+    @ViewChild('c_SortBySubjectName') c_SortBySubjectName!: DropdownComponent;
+    @ViewChild('c_SortBySubjectStatus') c_SortBySubjectStatus!: DropdownComponent;
 
     @ViewChild('c_RowsPerPage') c_RowsPerPage!: TextBoxComponent;
     @ViewChild('c_Page') c_Page!: PaginatorComponent;
@@ -59,23 +71,24 @@ export class ListSubjectComponent {
         private route: ActivatedRoute,
         private classroomService: ClassroomService,
         private subjectService: SubjectService,
+        private chapterService: ChapterService,
         private router: Router
       ) {}
 
-      subjects: ISubject_Detail[] = [];
+      chapters: IChapter_Detail[] = [];
       pages: IPagination = {};
       loading: boolean = true
       loading_list: boolean = true
       paginatedReq: IPaginatedRequest = {}
 
     ngOnInit(): void {
-        this.subjectService.getSubjects().subscribe({
-            next: (response: ISubjectDetails) => {
-              this.subjects = response.item1 ?? [];
+        this.chapterService.getChapters().subscribe({
+            next: (response: IChapterDetails) => {
+              this.chapters = response.item1 ?? [];
               this.pages = response.item2 ?? {};
             },
             error: (error) => {
-                this.subjects = [];
+                this.chapters = [];
                 this.pages = {};
                 
                 Swal.fire({
@@ -95,7 +108,7 @@ export class ListSubjectComponent {
     }
 
     navigateTo(action: string, code: string): void {
-        const route = `/subjects/${action}/${code}`;
+        const route = `/chapters/${action}/${code}`;
         this.router.navigateByUrl(route);
     }
 
@@ -126,30 +139,36 @@ export class ListSubjectComponent {
             SearchFilter: [
                 {key: "Code", value: this.c_SearchByCode.value, isFuzzy: this.c_SearchByCode_isFuzzy.value}, 
                 {key: "Name", value: this.c_SearchByName.value, isFuzzy: this.c_SearchByName_isFuzzy.value}, 
-                {key: "Status", value: this.c_OnlyActiveSubject.value ? 'active' : '_', isFuzzy: !this.c_OnlyActiveSubject.value}, 
+                {key: "Status", value: this.c_OnlyActiveChapter.value ? 'active' : '_', isFuzzy: !this.c_OnlyActiveChapter.value}, 
                 {key: "ClassCode", value: this.c_SearchByClassCode.value, isFuzzy: this.c_SearchByClassCode_isFuzzy.value}, 
                 {key: "ClassName", value: this.c_SearchByClassName.value, isFuzzy: this.c_SearchByClassName_isFuzzy.value}, 
                 {key: "ClassStatus", value: this.c_OnlyActiveClass.value ? 'active' : '_', isFuzzy: !this.c_OnlyActiveClass.value}, 
+                {key: "SubjectCode", value: this.c_SearchBySubjectCode.value, isFuzzy: this.c_SearchBySubjectCode_isFuzzy.value}, 
+                {key: "SubjectName", value: this.c_SearchBySubjectName.value, isFuzzy: this.c_SearchBySubjectName_isFuzzy.value}, 
+                {key: "SubjectStatus", value: this.c_OnlyActiveSubject.value ? 'active' : '_', isFuzzy: !this.c_OnlyActiveSubject.value}, 
             ],
             Order: [
                 {Column_Name: "ClassCode", Order_Mode: EnumMapper.ToOrderMode(this.c_SortByClassCode.value)},
+                {Column_Name: "SubjectCode", Order_Mode: EnumMapper.ToOrderMode(this.c_SortBySubjectCode.value)},
                 {Column_Name: "Code", Order_Mode: EnumMapper.ToOrderMode(this.c_SortByCode.value)},
                 {Column_Name: "ClassName", Order_Mode: EnumMapper.ToOrderMode(this.c_SortByClassName.value)},
+                {Column_Name: "SubjectName", Order_Mode: EnumMapper.ToOrderMode(this.c_SortBySubjectName.value)},
                 {Column_Name: "Name", Order_Mode: EnumMapper.ToOrderMode(this.c_SortByName.value)},
                 {Column_Name: "ClassStatus", Order_Mode: EnumMapper.ToOrderMode(this.c_SortByClassStatus.value)}, 
+                {Column_Name: "SubjectStatus", Order_Mode: EnumMapper.ToOrderMode(this.c_SortBySubjectStatus.value)}, 
                 {Column_Name: "Status", Order_Mode: EnumMapper.ToOrderMode(this.c_SortByStatus.value)}
             ],
             Pagination: {Page_Number: this.c_Page.value ?? 1, Rows_Per_Page: Number.parseInt(this.c_RowsPerPage.value)}
         }
         this.loading_list = true;
 
-        this.subjectService.getFilteredSubjects(this.paginatedReq).subscribe({
-            next: (response: ISubjectDetails) => {
-              this.subjects = response.item1 ?? [];
+        this.chapterService.getFilteredChapters(this.paginatedReq).subscribe({
+            next: (response: IChapterDetails) => {
+              this.chapters = response.item1 ?? [];
               this.pages = response.item2 ?? {};
             },
             error: (error) => {
-                this.subjects = [];
+                this.chapters = [];
                 this.pages = {};
                 
                 Swal.fire({
